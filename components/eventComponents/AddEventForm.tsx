@@ -19,56 +19,85 @@ import ImagePickerModal from "../UI/ImagePickerModal";
 import GooglePlacesInput from "../UI/GooglePlacesInput";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import CustomOutlineBtn from "../UI/CustomOutlineBtn";
-import { API_KEY } from "../../util/constants";
+import { API_KEY, BACKEND_LINK } from "../../util/constants";
+import * as FileSystem from "expo-file-system";
+import Geocoder from 'react-native-geocoding';
 import axios from "axios";
-type AddEventState = {
+export type AddEventState = {
   imagine: string;
   titlu: string;
   tip: string;
-  dataTimp: Date;
+  dataTimp: number;
   adresa: string;
   oras: string;
   descriere: string;
   coordonate: [number, number];
 };
+type ValueTypes = string | number | [number, number];
 export default function AddEventForm() {
+  Geocoder.init(API_KEY);
   const [date, setDate] = useState<Date>(new Date());
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [imagePreview, setImagePreview] = useState<string | false>(false);
 
+ 
   const [values, setValues] = useState<AddEventState>({
     imagine: "",
     titlu: "",
     tip: "",
-    dataTimp: new Date(),
+    dataTimp: 0,
     adresa: "",
     oras: "",
     descriere: "",
     coordonate: [0.0, 0.0],
   });
 
+  const convertImageToBase64 = async (uri: string) => {
+    try {
+      const base64String = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      return base64String;
+    } catch (error) {
+      console.error("Failed to convert image to base64:", error);
+      throw error;
+    }
+  };
+
+  async function previewImageHandler(uri: string) {
+    setImagePreview(uri);
+    const base64Img = await convertImageToBase64(uri);
+    valuesHandler(base64Img, "imagine");
+    setIsModalVisible(false);
+  }
   const onChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
-    valuesHandler(currentDate, "dataTimp");
+    const newDate = new Date(currentDate).getTime()
+    valuesHandler(newDate, "dataTimp");
   };
-  function previewImageHandler(uri: string) {
-    setImagePreview(uri);
-    valuesHandler(uri, "image");
-    setIsModalVisible(false);
-  }
   function modalVisibleHandler(bool: boolean) {
     setIsModalVisible(bool);
   }
-  function valuesHandler(value: string | Date, name: string) {
+  function valuesHandler(value:ValueTypes, name: string) {
     setValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   }
+  Geocoder.from(values.adresa)
+  .then(json => {
+    const location = json.results[0].geometry.location;
+    const coord: [number, number] = [location.lat, location.lng];
+    valuesHandler(coord, "coordonate");
+  })
+  
+
   function handleSubmitForm() {
-    axios.post("http://192.168.0.127:3000/login", values);
+    axios.post(BACKEND_LINK + "/addNewEvent", values);
+    //console.log(values)
   }
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -98,8 +127,8 @@ export default function AddEventForm() {
         />
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Titlu</Text>
           <TextInput
+            placeholder="Titlu"
             style={styles.input}
             onChangeText={(enteredText) => valuesHandler(enteredText, "titlu")}
           />
@@ -113,7 +142,7 @@ export default function AddEventForm() {
         />
 
         <View style={styles.dateTimeContainer}>
-          <View style={styles.dateTime}>
+          <View style={[styles.dateTime, { marginRight: 150 }]}>
             <Text style={styles.dateTimeText}>Data</Text>
             <DateTimePickerComponent
               mode="date"
@@ -131,7 +160,7 @@ export default function AddEventForm() {
             />
           </View>
         </View>
-        <View style={{ height: 70, zIndex: 2, elevation: 2 }}>
+        <View style={{ height: 50, zIndex: 2, elevation: 2, marginLeft: 20 }}>
           <GooglePlacesInput onHandleInput={valuesHandler} />
         </View>
 
@@ -153,11 +182,13 @@ export default function AddEventForm() {
             />
           </View>
         </TouchableWithoutFeedback>
-        <CustomOutlineBtn
-          color={Colors.primari300}
-          title="Adauga eveniment"
-          onPress={handleSubmitForm}
-        />
+        <View style={styles.submitBtn}>
+          <CustomOutlineBtn
+            color={Colors.primari300}
+            title="Adauga eveniment"
+            onPress={handleSubmitForm}
+          />
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -169,12 +200,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
+    padding: 20,
+    paddingTop: 80,
+    paddingBottom: 60,
   },
-
   imageContainer: {
-    width: 300,
+    width: 340,
     height: 150,
-    marginTop: 80,
+    marginBottom: 20,
+    alignSelf: "center",
   },
   image: {
     width: "100%",
@@ -182,11 +216,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   inputContainer: {
-    width: 300,
-    marginBottom: 5,
+    width: 340,
+    marginBottom: 20,
+    alignSelf: "center",
   },
   label: {
     marginBottom: 10,
+    alignSelf: "flex-start",
   },
   input: {
     width: "100%",
@@ -197,15 +233,16 @@ const styles = StyleSheet.create({
   },
   dateTimeContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: 300,
-    marginBottom: 20,
+
+    width: 335,
+    
+    alignSelf: "center",
+  },
+  dateTime: {
+    flex: 1,
   },
   dateTimeText: {
     marginBottom: 5,
-  },
-  dateTime: {
-    marginRight: 130,
   },
   description: {
     width: "100%",
@@ -217,7 +254,8 @@ const styles = StyleSheet.create({
   },
   placesAutocompleteContainer: {
     width: 300,
-    marginBottom: 20,
+    marginBottom: 10,
+    alignSelf: "center",
   },
   textInputContainer: {
     backgroundColor: "rgba(0,0,0,0)",
@@ -231,4 +269,7 @@ const styles = StyleSheet.create({
     color: "#5d5d5d",
     fontSize: 16,
   },
+  submitBtn:{
+    marginBottom:20,
+  }
 });

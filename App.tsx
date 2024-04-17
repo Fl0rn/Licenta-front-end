@@ -117,7 +117,15 @@ function AppContent() {
       <StatusBar />
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="BtnTaps" component={BtnTaps} />
+          
+          {!authCtx.isAuthenticated && (
+            <Stack.Screen
+              name="Authentication"
+              component={AuthenticationStack}
+              
+            />
+          )}
+          {authCtx.isAuthenticated && <Stack.Screen name="BtnTaps" component={BtnTaps} />}
           <Stack.Screen name="AddEvent" component={AddEventScreen} />
         </Stack.Navigator>
       </NavigationContainer>

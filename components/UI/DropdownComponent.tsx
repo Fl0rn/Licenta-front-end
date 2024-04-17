@@ -22,7 +22,7 @@ type DropdownComponentProps ={
   label:string,
   mode:string,
   icon:"location-outline"|"body-outline"
-  onHandleInput:(name:string | Date, value:string) => void
+  onHandleInput:(value: string | number | [number, number], name: string) => void; 
 }
 const DropdownComponent = ({label,mode,icon,onHandleInput}:DropdownComponentProps) => {
   const [value, setValue] = useState<string>("");
@@ -53,7 +53,7 @@ const DropdownComponent = ({label,mode,icon,onHandleInput}:DropdownComponentProp
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? 'Categorie' : '...'}
+        placeholder={!isFocus ? `${label}` : '...'}
         searchPlaceholder="Search..."
         value={value}
         onFocus={() => setIsFocus(true)}
@@ -80,7 +80,7 @@ export default DropdownComponent;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    padding: 16,
+    padding: 10,
   },
   dropdown: {
     height: 50,

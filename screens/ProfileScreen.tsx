@@ -3,8 +3,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../util/Colors";
 import CustomOutlineBtn from "../components/UI/CustomOutlineBtn";
 import IconBtn from "../components/UI/IconBttn";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ImagePickerModal from "../components/UI/ImagePickerModal";
+import { AuthContext } from "../store/auth-context";
 export function ProfileScreen() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | false>(false);
@@ -15,6 +16,8 @@ export function ProfileScreen() {
   function modalVisibleHandler(bool: boolean) {
     setIsModalVisible(bool);
   }
+  const authCtx = useContext(AuthContext)
+  
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -38,7 +41,7 @@ export function ProfileScreen() {
           </View>
         </View>
       </View>
-      <Text style={styles.acountTypeText}>Florin Cret</Text>
+      <Text style={styles.acountTypeText}>{authCtx.userInfo?.nume}</Text>
       <ImagePickerModal
         visible={isModalVisible}
         onImagePrevHandler={previewImageHandler}
@@ -58,7 +61,7 @@ export function ProfileScreen() {
             style={styles.icons}
           />
 
-          <Text style={styles.infoText}>florin.cret.fc@gmail.com</Text>
+          <Text style={styles.infoText}>{authCtx.userInfo?.email}</Text>
         </View>
         <View style={styles.infoView}>
           <Ionicons
@@ -67,7 +70,7 @@ export function ProfileScreen() {
             size={24}
             style={styles.icons}
           />
-          <Text style={styles.infoText}>Timisoara</Text>
+          <Text style={styles.infoText}>{authCtx.userInfo?.oras}</Text>
         </View>
         <View style={styles.infoView}>
           <Ionicons
@@ -94,7 +97,7 @@ export function ProfileScreen() {
           <CustomOutlineBtn
             color={Colors.primari300}
             title="Logout"
-            onPress={() => {}}
+            onPress={() => {authCtx.logout()}}
           />
         </View>
         <Button title="Cont Creator" color={Colors.primari300} />

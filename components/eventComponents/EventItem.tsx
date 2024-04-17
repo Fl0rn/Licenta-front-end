@@ -9,10 +9,11 @@ type EventProps ={
     titlu:string
 }
 export default function EventItem({image,data,titlu}:EventProps) {
+  const imageUri = `data:image/jpeg;base64,${image}`;
   return (
     <Pressable style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{uri:"https://static.iabilet.ro/img/auto_resized/db/event/01/6e/09/00000259011-9c32-1200x1200-n-553de27a.jpg"}} style={styles.image}/>
+        <Image source={{uri:imageUri }} style={styles.image}/>
       </View>
       <View style={styles.infoContainer}>
         <View  style={{ marginRight: 70 }}>
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     infoContainer:{
         flexDirection:'row',
         height:40,
+        width:320,
         alignItems:'center',
         justifyContent:'space-between',
         backgroundColor:Colors.gray500,
