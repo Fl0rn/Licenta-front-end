@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Image,
@@ -11,18 +11,21 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import DropdownComponent from "../UI/DropdownComponent";
 import { Colors } from "../../util/Colors";
 import DateTimePickerComponent from "../UI/DateTimePicker";
 import ImagePickerModal from "../UI/ImagePickerModal";
 import GooglePlacesInput from "../UI/GooglePlacesInput";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import CustomOutlineBtn from "../UI/CustomOutlineBtn";
 import { API_KEY, BACKEND_LINK } from "../../util/constants";
-import * as FileSystem from "expo-file-system";
 import Geocoder from 'react-native-geocoding';
 import axios from "axios";
+import { AuthContext } from "../../store/auth-context";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackPrams } from "../../App";
+import { convertImageToBase64 } from "../../util/methods";
 export type AddEventState = {
   imagine: string;
   titlu: string;
@@ -35,12 +38,13 @@ export type AddEventState = {
 };
 type ValueTypes = string | number | [number, number];
 export default function AddEventForm() {
+  const navigation = useNavigation<NavigationProp<RootStackPrams>>()
   Geocoder.init(API_KEY);
   const [date, setDate] = useState<Date>(new Date());
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [imagePreview, setImagePreview] = useState<string | false>(false);
 
- 
+ const authCtx = useContext(AuthContext);
   const [values, setValues] = useState<AddEventState>({
     imagine: "",
     titlu: "",
@@ -52,17 +56,7 @@ export default function AddEventForm() {
     coordonate: [0.0, 0.0],
   });
 
-  const convertImageToBase64 = async (uri: string) => {
-    try {
-      const base64String = await FileSystem.readAsStringAsync(uri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-      return base64String;
-    } catch (error) {
-      console.error("Failed to convert image to base64:", error);
-      throw error;
-    }
-  };
+ 
 
   async function previewImageHandler(uri: string) {
     setImagePreview(uri);
@@ -93,9 +87,19 @@ export default function AddEventForm() {
   })
   
 
-  function handleSubmitForm() {
-    axios.post(BACKEND_LINK + "/addNewEvent", values);
-    //console.log(values)
+  async function handleSubmitForm() {
+    
+    const valuesWithEmail = {...values, creatorEmail:authCtx.userInfo?.email}
+    try {
+      const response = await axios.post(BACKEND_LINK + "/addNewEvent", valuesWithEmail);
+      
+      if (response.status === 200) {
+        navigation.navigate("BtnTaps");
+      } 
+    } catch (error) {
+      Alert.alert("Structura invalida","Adauga toate proprietatile")
+    }
+    
   }
 
   return (
@@ -188,6 +192,8 @@ export default function AddEventForm() {
             title="Adauga eveniment"
             onPress={handleSubmitForm}
           />
+          
+          <Button title="Cancel" color={Colors.primari300} onPress={()=>navigation.navigate("BtnTaps")}  />
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -270,6 +276,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   submitBtn:{
-    marginBottom:20,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    marginBottom:30,
+
   }
 });

@@ -15,6 +15,9 @@ import LogoutBtn from "./components/UI/LogoutBtn";
 import AddEventScreen from "./screens/AddEventSreen";
 import { ProfileScreen } from "./screens/ProfileScreen";
 import { Colors } from "./util/Colors";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
+import DetailScreen from "./screens/DetailScreen";
 const Stack = createStackNavigator<RootStackPrams>();
 const BtnTap = createBottomTabNavigator();
 export type RootStackPrams = {
@@ -22,6 +25,10 @@ export type RootStackPrams = {
   AuthScreen: undefined;
   Authentication: undefined;
   AddEvent: undefined;
+  EventScreen:undefined;
+  DetailPage:{
+    id:string,
+  };
 };
 
 function BtnTaps() {
@@ -88,9 +95,12 @@ function AuthenticationStack() {
 
 export default function App() {
   return (
+    <Provider store={store}>
+
     <AuthContextProvider>
       <AppContent />
     </AuthContextProvider>
+    </Provider>
   );
 }
 
@@ -127,6 +137,7 @@ function AppContent() {
           )}
           {authCtx.isAuthenticated && <Stack.Screen name="BtnTaps" component={BtnTaps} />}
           <Stack.Screen name="AddEvent" component={AddEventScreen} />
+          <Stack.Screen name="DetailPage" component={DetailScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>

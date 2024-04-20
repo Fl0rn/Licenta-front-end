@@ -3,17 +3,24 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import timestampToDate from "../../util/methods";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../util/Colors";
+import { useNavigation } from "@react-navigation/native";
 type EventProps ={
     image:string,
     data:number,
-    titlu:string
+    titlu:string,
+    id:string
+    onPressToNavigate: (id:string) => void
 }
-export default function EventItem({image,data,titlu}:EventProps) {
-  const imageUri = `data:image/jpeg;base64,${image}`;
+export default function EventItem({image,data,titlu,onPressToNavigate,id}:EventProps) {
+  const navigation = useNavigation()
+  function handlePress(){
+    
+  }
+
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={()=>onPressToNavigate(id)}>
       <View style={styles.imageContainer}>
-        <Image source={{uri:imageUri }} style={styles.image}/>
+        <Image source={{uri:image}} style={styles.image}/>
       </View>
       <View style={styles.infoContainer}>
         <View  style={{ marginRight: 70 }}>

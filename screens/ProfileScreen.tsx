@@ -3,34 +3,51 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../util/Colors";
 import CustomOutlineBtn from "../components/UI/CustomOutlineBtn";
 import IconBtn from "../components/UI/IconBttn";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ImagePickerModal from "../components/UI/ImagePickerModal";
 import { AuthContext } from "../store/auth-context";
+import axios from "axios";
+import { BACKEND_LINK } from "../util/constants";
+import { convertImageToBase64 } from "../util/methods";
+type UpdatePhoto = {
+  userEmail: string;
+  base64Photo: string;
+};
 export function ProfileScreen() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | false>(false);
-  function previewImageHandler(uri: string) {
-    setImagePreview(uri);
-    setIsModalVisible(false);
+  const [rerenderKey, setRerenderKey] = useState(0);
+  const authCtx = useContext(AuthContext);
+
+  async function previewImageHandler(uri: string) {
+    try {
+      const bytesImage = await convertImageToBase64(uri);
+      const values: UpdatePhoto = {
+        userEmail: authCtx.userInfo!.email,
+        base64Photo: bytesImage,
+      };
+      await axios.put(BACKEND_LINK + "/updateProfilePicture", values);
+      setRerenderKey((prevKey) => prevKey + 1);
+      setIsModalVisible(false);
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+    }
   }
+
   function modalVisibleHandler(bool: boolean) {
     setIsModalVisible(bool);
   }
-  const authCtx = useContext(AuthContext)
+
   
   return (
-    <View style={styles.container}>
+    <View key={rerenderKey} style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.circleContainer}>
-          {!imagePreview ? (
-            <Ionicons name="person" color="black" size={40} />
-          ) : (
-            <Image
-              source={{ uri: imagePreview }}
-              style={styles.image}
-              
-            />
-          )}
+          <Image
+            source={{
+              uri: `http://192.168.0.127:3000/profileImages/${authCtx.userInfo?.email}.jpg`,
+            }}
+            style={styles.image}
+          />
           <View style={styles.addImageIcon}>
             <IconBtn
               iconName="camera-outline"
@@ -97,7 +114,9 @@ export function ProfileScreen() {
           <CustomOutlineBtn
             color={Colors.primari300}
             title="Logout"
-            onPress={() => {authCtx.logout()}}
+            onPress={() => {
+              authCtx.logout();
+            }}
           />
         </View>
         <Button title="Cont Creator" color={Colors.primari300} />
@@ -133,10 +152,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
-  image:{
-    height:"100%",
-    width:"100%",
-    borderRadius:150,
+  image: {
+    height: "100%",
+    width: "100%",
+    borderRadius: 150,
   },
   addImageIcon: {
     position: "absolute",
@@ -175,10 +194,9 @@ const styles = StyleSheet.create({
   infoText: {
     flex: 1,
     textAlign: "center",
-    marginRight:60,
-    
-    fontSize:17
+    marginRight: 60,
 
+    fontSize: 17,
   },
   buttonsContainer: {
     marginTop: 40,

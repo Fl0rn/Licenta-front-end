@@ -8,7 +8,14 @@ type AuthContextType = {
   authenticate: (userInfo: UserFormState) => void;
   logout: () => void;
 };
-
+type UserModel ={
+  nume: string;
+  email: string;
+  cnp: string;
+  oras: string;
+  parola: string;
+  hasProfilePicture: string;
+}
 export const AuthContext = createContext<AuthContextType>({
   userInfo: null,
   isAuthenticated: false,

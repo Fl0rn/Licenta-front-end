@@ -21,6 +21,9 @@ import { useEffect, useState } from "react";
 import { AddEventState } from "../components/eventComponents/AddEventForm";
 import timestampToDate from "../util/methods";
 interface Event {
+  id: string;
+  creatorId: string;
+  creatorEmail: string;
   imagine: string;
   titlu: string;
   tip: string;
@@ -28,27 +31,28 @@ interface Event {
   adresa: string;
   oras: string;
   descriere: string;
-  coordonate: [number, number];
+  coordonate: number[];
 }
+type Props = StackNavigationProp<RootStackPrams,'EventScreen'>
 export default function EvemtsSreen() {
   const navigation = useNavigation<StackNavigationProp<RootStackPrams>>();
   function hadlePress() {
-    navigation.navigate("AddEvent");
+    navigation.replace("AddEvent");
   }
   const [events, setEvents] = useState<Event[]>([]);
   useEffect(() => {
-    async function getAllEvents() {
-      try {
-        const response = await axios.get(BACKEND_LINK + "/getAllEvents");
-        
-        setEvents(response.data); 
-      } catch (error) {
-        console.error("Failed to fetch events:", error);
-      }
-    }
+    
     getAllEvents();
-  }, [events]);
-
+  }, []);
+  async function getAllEvents() {
+    try {
+      const response = await axios.get(BACKEND_LINK + "/getAllEvents");
+     
+      setEvents(response.data); 
+    } catch (error) {
+      console.error("Failed to fetch events:", error);
+    }
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -97,9 +101,12 @@ export default function EvemtsSreen() {
           data={events}
           renderItem={({ item }) => (
             <EventItem
-              image={item.imagine}
+              image={`http://192.168.0.127:3000/eventImages/${item.id}.jpg`}
               data={item.dataTimp}
               titlu={item.titlu}
+              id={item.id}
+              onPressToNavigate={(id)=>navigation.navigate("DetailPage",{id:id})}
+              
             />
           )}
           keyExtractor={(item, index) => index.toString()}
