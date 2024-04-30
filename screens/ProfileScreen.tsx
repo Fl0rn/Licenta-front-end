@@ -9,22 +9,30 @@ import { AuthContext } from "../store/auth-context";
 import axios from "axios";
 import { BACKEND_LINK } from "../util/constants";
 import { convertImageToBase64 } from "../util/methods";
+import ProfileHeader from "../components/profileComponents/ProfileHeader";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackPrams } from "../App";
+import { StackNavigationProp } from "@react-navigation/stack";
 type UpdatePhoto = {
-  userEmail: string;
+  userId: string;
   base64Photo: string;
 };
-export function ProfileScreen() {
+
+export function ProfileScreen(){
+  const navigation = useNavigation<StackNavigationProp<RootStackPrams>>();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rerenderKey, setRerenderKey] = useState(0);
   const authCtx = useContext(AuthContext);
-
+  const userInfo = authCtx.userInfo;
+  console.log(userInfo);
   async function previewImageHandler(uri: string) {
     try {
       const bytesImage = await convertImageToBase64(uri);
       const values: UpdatePhoto = {
-        userEmail: authCtx.userInfo!.email,
+        userId: authCtx.userInfo!.id,
         base64Photo: bytesImage,
       };
+     console.log(values.userId,typeof(values.userId))
       await axios.put(BACKEND_LINK + "/updateProfilePicture", values);
       setRerenderKey((prevKey) => prevKey + 1);
       setIsModalVisible(false);
@@ -40,24 +48,7 @@ export function ProfileScreen() {
   
   return (
     <View key={rerenderKey} style={styles.container}>
-      <View style={styles.topContainer}>
-        <View style={styles.circleContainer}>
-          <Image
-            source={{
-              uri: `http://192.168.0.127:3000/profileImages/${authCtx.userInfo?.email}.jpg`,
-            }}
-            style={styles.image}
-          />
-          <View style={styles.addImageIcon}>
-            <IconBtn
-              iconName="camera-outline"
-              color={Colors.primari300}
-              size={24}
-              onPress={() => setIsModalVisible(true)}
-            />
-          </View>
-        </View>
-      </View>
+      <ProfileHeader showModlalHandler={ setIsModalVisible}/>
       <Text style={styles.acountTypeText}>{authCtx.userInfo?.nume}</Text>
       <ImagePickerModal
         visible={isModalVisible}
@@ -119,7 +110,7 @@ export function ProfileScreen() {
             }}
           />
         </View>
-        <Button title="Cont Creator" color={Colors.primari300} />
+        <Button title="Cont Creator" color={Colors.primari300} onPress={()=>navigation.navigate("AcceptRequestScreen")}/>
       </View>
     </View>
   );
@@ -130,47 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  topContainer: {
-    backgroundColor: Colors.primari300,
-    height: 230,
-    paddingTop: 50,
-    alignItems: "center",
-    borderBottomRightRadius: 150,
-    borderBottomLeftRadius: 150,
-  },
-  circleContainer: {
-    backgroundColor: "white",
-    borderRadius: 70,
-    height: 130,
-    width: 130,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "visible",
-    marginTop: 80,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  image: {
-    height: "100%",
-    width: "100%",
-    borderRadius: 150,
-  },
-  addImageIcon: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 5,
-    marginRight: 5,
-    marginBottom: 5,
-    shadowColor: "black",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
+  
 
   acountTypeText: {
     textAlign: "center",

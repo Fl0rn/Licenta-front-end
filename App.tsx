@@ -18,8 +18,9 @@ import { Colors } from "./util/Colors";
 import { Provider } from "react-redux";
 import { store } from "./store/redux/store";
 import DetailScreen from "./screens/DetailScreen";
+import AcceptRequestScreen from "./screens/AcceptRequsetScreen";
 const Stack = createStackNavigator<RootStackPrams>();
-const BtnTap = createBottomTabNavigator();
+const BtnTap = createBottomTabNavigator<RootBtnTaps>();
 export type RootStackPrams = {
   BtnTaps: undefined;
   AuthScreen: undefined;
@@ -29,8 +30,13 @@ export type RootStackPrams = {
   DetailPage:{
     id:string,
   };
+  AcceptRequestScreen:undefined;
 };
-
+export type RootBtnTaps ={
+  EventScreen:undefined,
+  ReclamatiiScreen:undefined,
+  ProfileScreen:undefined
+}
 function BtnTaps() {
   const authCtx = useContext(AuthContext);
   function handlerLogout() {
@@ -138,6 +144,7 @@ function AppContent() {
           {authCtx.isAuthenticated && <Stack.Screen name="BtnTaps" component={BtnTaps} />}
           <Stack.Screen name="AddEvent" component={AddEventScreen} />
           <Stack.Screen name="DetailPage" component={DetailScreen}/>
+          <Stack.Screen name="AcceptRequestScreen" component={AcceptRequestScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>

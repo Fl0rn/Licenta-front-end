@@ -79,17 +79,30 @@ export default function AddEventForm() {
       [name]: value,
     }));
   }
-  Geocoder.from(values.adresa)
-  .then(json => {
-    const location = json.results[0].geometry.location;
-    const coord: [number, number] = [location.lat, location.lng];
-    valuesHandler(coord, "coordonate");
-  })
-  
+  async function getGeoCoding(){
+
+    Geocoder.from(values.adresa)
+    .then(json => {
+     
+      if (json.results.length > 0) {
+        const location = json.results[0].geometry.location;
+        const coord: [number, number] = [location.lat, location.lng];
+        valuesHandler(coord, "coordonate");
+      } else {
+        
+        console.error('No results found for the specified address');
+      }
+    })
+    .catch(error => {
+    
+      console.error('Geocoding error:', error);
+    });
+  }
 
   async function handleSubmitForm() {
-    
+    await getGeoCoding();
     const valuesWithEmail = {...values, creatorEmail:authCtx.userInfo?.email}
+    console.log(1)
     try {
       const response = await axios.post(BACKEND_LINK + "/addNewEvent", valuesWithEmail);
       
@@ -98,7 +111,8 @@ export default function AddEventForm() {
       } 
     } catch (error) {
       Alert.alert("Structura invalida","Adauga toate proprietatile")
-    }
+    }finally{console.log(2)}
+
     
   }
 
@@ -174,7 +188,7 @@ export default function AddEventForm() {
           icon="location-outline"
           onHandleInput={valuesHandler}
         />
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Descriere</Text>
             <TextInput
@@ -183,9 +197,10 @@ export default function AddEventForm() {
               onChangeText={(enteredText) =>
                 valuesHandler(enteredText, "descriere")
               }
+              blurOnSubmit={true}
             />
           </View>
-        </TouchableWithoutFeedback>
+       
         <View style={styles.submitBtn}>
           <CustomOutlineBtn
             color={Colors.primari300}

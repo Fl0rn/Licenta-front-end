@@ -6,6 +6,7 @@ import {
   launchCameraAsync,
   useCameraPermissions,
   PermissionStatus,
+  launchImageLibraryAsync,
 } from "expo-image-picker";
 export default function ImagePickerModal({
   visible,
@@ -14,7 +15,7 @@ export default function ImagePickerModal({
 }: {
   visible: boolean;
   onPressHandler: (bool: boolean) => void;
-  onImagePrevHandler: (uri:string) => void;
+  onImagePrevHandler: (uri: string) => void;
 }) {
   const [cameraPermissionInfo, reqPermission] = useCameraPermissions();
   async function verifyPermissions() {
@@ -24,29 +25,36 @@ export default function ImagePickerModal({
     }
     if (cameraPermissionInfo?.status === PermissionStatus.DENIED) {
       Alert.alert("Permisiuni insuficiente", "Trebuie sa accepti permisionile");
-      return false
+      return false;
     }
-    return true
+    return true;
   }
   async function takeImageHandler() {
-    const hasPermission  = await verifyPermissions();
-    if(!hasPermission){
-        return
+    const hasPermission = await verifyPermissions();
+    if (!hasPermission) {
+      return;
     }
     const image = await launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],
       quality: 1,
     });
-    onImagePrevHandler(image.assets![0].uri)
-    
+    onImagePrevHandler(image.assets![0].uri);
+  }
+  async function pickImageHandler() {
+    const image = await launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 1,
+    });
+    onImagePrevHandler(image.assets![0].uri);
   }
   return (
     <Modal
       visible={visible}
       onRequestClose={() => onPressHandler(false)}
       animationType="fade"
-      transparent={true} 
+      transparent={true}
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
@@ -67,7 +75,7 @@ export default function ImagePickerModal({
               <IconBtn
                 color={Colors.primari300}
                 size={30}
-                onPress={takeImageHandler}
+                onPress={pickImageHandler}
                 iconName="folder-outline"
               />
               <View>

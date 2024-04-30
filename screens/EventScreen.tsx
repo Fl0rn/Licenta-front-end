@@ -101,7 +101,7 @@ export default function EvemtsSreen() {
           data={events}
           renderItem={({ item }) => (
             <EventItem
-              image={`http://192.168.0.127:3000/eventImages/${item.id}.jpg`}
+              image={`${BACKEND_LINK}/eventImages/${item.id}.jpg`}
               data={item.dataTimp}
               titlu={item.titlu}
               id={item.id}

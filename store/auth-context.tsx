@@ -3,32 +3,33 @@ import { UserFormState } from "../screens/AuthScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type AuthContextType = {
-  userInfo: UserFormState | null;
+  userInfo: UserModel | null;
   isAuthenticated: boolean;
-  authenticate: (userInfo: UserFormState) => void;
+  authenticate: (userInfo: UserModel) => void;
   logout: () => void;
 };
-type UserModel ={
+export type UserModel ={
+  id:string,
   nume: string;
   email: string;
   cnp: string;
   oras: string;
   parola: string;
-  hasProfilePicture: string;
+ 
 }
 export const AuthContext = createContext<AuthContextType>({
   userInfo: null,
   isAuthenticated: false,
-  authenticate: (userInfo: UserFormState) => {},
+  authenticate: (userInfo: UserModel) => {},
   logout: () => {},
 });
 
 function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [auth, setAuth] = useState<UserFormState | null>(null);
+  const [auth, setAuth] = useState<UserModel | null>(null);
 
   
 
-  function authenticate(userInfo: UserFormState) {
+  function authenticate(userInfo: UserModel) {
     setAuth(userInfo);
     const userInfoJson = JSON.stringify(userInfo);
     AsyncStorage.setItem("info", userInfoJson);

@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { storeUser } from "../components/http";
 import LoginForm from "../components/authComponents/LoginForm";
-import { AuthContext } from "../store/auth-context";
+import { AuthContext, UserModel } from "../store/auth-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../util/Colors";
 import { BACKEND_LINK } from "../util/constants";
@@ -116,20 +116,24 @@ export default function AuthScreen() {
       validityInfoCopy.oras !== null &&
       validityInfoCopy.parola !== null
     ) {
-      await axios.post(BACKEND_LINK +"/addUser", authInfo);
-      authCtx.authenticate(authInfo);
+      const userSaved = await axios.post(BACKEND_LINK +"/addUser", authInfo);
+      
+      const userToStore = {...userSaved.data,id:userSaved.data._id}
+      console.log(userToStore)
+      authCtx.authenticate(userToStore);
     }
   }
 
   async function handleLoginPress(loginInfo: UserLoginState) {
-    console.log(loginInfo)
+    
     try {
       const response = await axios.post(
           BACKEND_LINK + "/login",
         loginInfo
       );
       
-        const infoToStore :UserFormState ={
+        const infoToStore :UserModel ={
+         id:response.data._id,
          nume: response.data.nume,
          email:response.data.email,
          cnp:response.data.cnp,
