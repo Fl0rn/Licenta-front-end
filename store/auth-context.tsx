@@ -15,6 +15,7 @@ export type UserModel ={
   cnp: string;
   oras: string;
   parola: string;
+  acountType:number
  
 }
 export const AuthContext = createContext<AuthContextType>({

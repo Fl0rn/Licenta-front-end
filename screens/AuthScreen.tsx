@@ -138,11 +138,12 @@ export default function AuthScreen() {
          email:response.data.email,
          cnp:response.data.cnp,
          oras: response.data.oras,
-         parola: response.data.parola
+         parola: response.data.parola,
+         acountType:response.data.acountType
 
         } 
           
-        console.log(infoToStore)
+        console.log("login",infoToStore)
 
     
       authCtx.authenticate(infoToStore);

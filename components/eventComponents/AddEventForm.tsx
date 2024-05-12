@@ -36,6 +36,7 @@ export type AddEventState = {
   descriere: string;
   coordonate: [number, number];
 };
+
 type ValueTypes = string | number | [number, number];
 export default function AddEventForm() {
   const navigation = useNavigation<NavigationProp<RootStackPrams>>()
@@ -81,28 +82,13 @@ export default function AddEventForm() {
   }
   async function getGeoCoding(){
 
-    Geocoder.from(values.adresa)
-    .then(json => {
-     
-      if (json.results.length > 0) {
-        const location = json.results[0].geometry.location;
-        const coord: [number, number] = [location.lat, location.lng];
-        valuesHandler(coord, "coordonate");
-      } else {
-        
-        console.error('No results found for the specified address');
-      }
-    })
-    .catch(error => {
-    
-      console.error('Geocoding error:', error);
-    });
   }
 
   async function handleSubmitForm() {
-    await getGeoCoding();
+   
+    
     const valuesWithEmail = {...values, creatorEmail:authCtx.userInfo?.email}
-    console.log(1)
+    console.log(values.coordonate)
     try {
       const response = await axios.post(BACKEND_LINK + "/addNewEvent", valuesWithEmail);
       
@@ -179,7 +165,7 @@ export default function AddEventForm() {
           </View>
         </View>
         <View style={{ height: 50, zIndex: 2, elevation: 2, marginLeft: 20 }}>
-          <GooglePlacesInput onHandleInput={valuesHandler} />
+          <GooglePlacesInput onHandleInput={valuesHandler}  />
         </View>
 
         <DropdownComponent

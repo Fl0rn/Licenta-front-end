@@ -41,7 +41,7 @@ export default function DetailScreen({ route }: Props) {
     adresa: "",
     oras: "",
     descriere: "",
-    coordonate: [0.0, 0.0],
+    coordonate: [0.1, 0.1],
     comentarii: [],
     creatorEmail: "",
     id: "",
@@ -88,10 +88,7 @@ export default function DetailScreen({ route }: Props) {
     latitude: values.coordonate[0],
     longitude: values.coordonate[1],
   };
-  const testOrigin = {
-    latitude: 45.748098,
-    longitude: 21.227099,
-  };
+
   console.log(coords);
   const [locationPermissionInfo, requestPermission] =
     useForegroundPermissions();
@@ -124,7 +121,7 @@ export default function DetailScreen({ route }: Props) {
   function showModalHandler(bol: boolean) {
     setShowModal(bol);
   }
-
+console.log(values.coordonate)
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -169,7 +166,7 @@ export default function DetailScreen({ route }: Props) {
             <MapView
               style={styles.map}
               initialRegion={TIMISOARA}
-              provider={PROVIDER_GOOGLE}
+              //provider={PROVIDER_GOOGLE}
             >
               <Marker coordinate={coords} />
               <Marker coordinate={location} />
@@ -182,7 +179,7 @@ export default function DetailScreen({ route }: Props) {
           </View>
           <CommentsContainer comments={values.comentarii} />
         </ScrollView>
-        <AddCommentBtn onPress={showModalHandler} />
+        <AddCommentBtn onPress={showModalHandler} name="maps-ugc"/>
         <AddCommentsModal
           isVisible={showModal}
           onPress={showModalHandler}
@@ -243,6 +240,7 @@ const styles = StyleSheet.create({
   mapView: {
     height: 200,
     width: "100%",
+    backgroundColor:'white',
     shadowColor: "#000",
     shadowOffset: {
       width: 5,

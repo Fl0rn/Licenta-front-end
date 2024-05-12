@@ -7,18 +7,27 @@ import { Colors } from "../../util/Colors";
 function GooglePlacesInput({
   onHandleInput,
 }: {
-  onHandleInput: (value: string | number, name: string) => void;
+  onHandleInput: (value: string | number | [number,number] , name: string) => void;
 }) {
   return (
     <GooglePlacesAutocomplete
+    GooglePlacesDetailsQuery={{ fields: "geometry" }}
       placeholder="Adresa"
-      onPress={(data, details = null) =>
-        onHandleInput(data.description, "adresa")
-      }
+      onPress={(data, details = null) => {
+        if (details) {
+          console.log(details)
+          onHandleInput(data.description, "adresa");
+          const coords: [number, number] = [0, 0];
+          coords[0] = details.geometry?.location.lat ?? 0;
+          coords[1] = details.geometry?.location.lng ?? 0;
+          onHandleInput(coords, "coordonate");
+        }
+      }}
       query={{
         key: API_KEY,
         language: "en",
       }}
+      fetchDetails={true}
       styles={{
         container: { position: "absolute", top: 0, left: 0, right: 0 },
         listView: { zIndex: 9999 },

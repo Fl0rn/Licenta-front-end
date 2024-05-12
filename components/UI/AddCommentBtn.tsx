@@ -3,9 +3,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "../../util/Colors";
 type AddCommProps ={
     onPress: (visible:true)=>void
-    
+    name:"maps-ugc"| "add-circle",
 }
-export default function AddCommentBtn({onPress}:AddCommProps){
+export default function AddCommentBtn({onPress,name}:AddCommProps){
     return<View style={styles.addComContainer}>
           <Pressable
             style={({ pressed }) => pressed && styles.pressed}
@@ -15,7 +15,7 @@ export default function AddCommentBtn({onPress}:AddCommProps){
           >
             
             <View style={styles.addCom}>
-              <MaterialIcons name="maps-ugc" size={30} color="white" />
+              <MaterialIcons name={name} size={30} color="white" />
             </View>
           </Pressable>
         </View>
@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         borderRadius: 50,
-       
         justifyContent: "center",
-    
         alignItems: "center",
       },
       pressed: {

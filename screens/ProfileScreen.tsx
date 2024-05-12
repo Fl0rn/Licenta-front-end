@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import ImagePickerModal from "../components/UI/ImagePickerModal";
 import { AuthContext } from "../store/auth-context";
 import axios from "axios";
-import { BACKEND_LINK } from "../util/constants";
+import { BACKEND_LINK, STATUS_UTILIZATOR } from "../util/constants";
 import { convertImageToBase64 } from "../util/methods";
 import ProfileHeader from "../components/profileComponents/ProfileHeader";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -24,7 +24,7 @@ export function ProfileScreen(){
   const [rerenderKey, setRerenderKey] = useState(0);
   const authCtx = useContext(AuthContext);
   const userInfo = authCtx.userInfo;
-  console.log(userInfo);
+ 
   async function previewImageHandler(uri: string) {
     try {
       const bytesImage = await convertImageToBase64(uri);
@@ -45,7 +45,7 @@ export function ProfileScreen(){
     setIsModalVisible(bool);
   }
 
-  
+  console.log(authCtx.userInfo?.acountType)
   return (
     <View key={rerenderKey} style={styles.container}>
       <ProfileHeader showModlalHandler={ setIsModalVisible}/>
@@ -96,7 +96,7 @@ export function ProfileScreen(){
             size={24}
             style={styles.icons}
           />
-          <Text style={styles.infoText}>Utilizator</Text>
+          <Text style={styles.infoText}>{STATUS_UTILIZATOR[authCtx.userInfo?.acountType!]}</Text>
         </View>
       </View>
 
