@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MapView, {
   Callout,
+  LatLng,
+  LongPressEvent,
+  MapPressEvent,
   Marker,
   PROVIDER_GOOGLE,
   Polygon,
@@ -19,7 +22,8 @@ import AddReclamatieBtn from "../components/reclamatiiComponents/AddReclamatieMo
 import AddReclamatieModal from "../components/reclamatiiComponents/AddReclamatieModal";
 import MarkerInfo from "../components/reclamatiiComponents/MarkerInfo";
 import axios from "axios";
-type Plangeri = {
+import IconBtn from "../components/UI/IconBttn";
+export type Plangeri = {
   id: string;
   accountName: string;
   accountId: string;
@@ -30,7 +34,18 @@ type Plangeri = {
   longitude: number;
 };
 export default function ReclamatiiScreen() {
-  const [plangeri, setPlangeri] = useState<Array<Plangeri>>([
+  const [markerCoords, setMarkerCoords] = useState<LatLng | null>(null);
+  
+  const handlePress = (event: MapPressEvent): void => {
+    const coords = event.nativeEvent.coordinate;
+    const trimmedCoords: LatLng = {
+      latitude: parseFloat(coords.latitude.toFixed(6)),
+      longitude: parseFloat(coords.longitude.toFixed(6)),
+    };
+    setMarkerCoords(trimmedCoords);
+    console.log(trimmedCoords);
+  };
+  const [plangeri, setPlangeri] = useState<Plangeri[]>([
     {
       accountId: "",
       accountName: "",
@@ -46,6 +61,7 @@ export default function ReclamatiiScreen() {
     async function fetchPlangeri() {
       const response = await axios.get(BACKEND_LINK + "/getAllPlangeri");
       setPlangeri(response.data);
+      console.log("plangeri",response.data)
     }
     fetchPlangeri();
   }, []);
@@ -67,10 +83,6 @@ export default function ReclamatiiScreen() {
       mapRef.current?.animateToRegion(TIMISOARA, 1000);
     }
   };
-  const testOrigin = {
-    latitude: 45.748098,
-    longitude: 21.227099,
-  };
 
   return (
     <View style={styles.container}>
@@ -82,6 +94,9 @@ export default function ReclamatiiScreen() {
         //provider={PROVIDER_GOOGLE}
         //onRegionChange={handleRegionChange}
         mapType="mutedStandard"
+        onPress={handlePress}
+        onLongPress={()=>setMarkerCoords(null)}
+       
       >
         <Polygon
           coordinates={TIMISOARA_POLIGON}
@@ -94,25 +109,42 @@ export default function ReclamatiiScreen() {
           strokeColor="rgba(0, 0, 0, 0)"
           fillColor="rgba(0, 0, 0, 0.5)"
         />
-
-        {plangeri.map((item) => (
-          <Marker  coordinate={{ latitude: item.latitude, longitude: item.longitude }} key={item.id}> 
+        {markerCoords && <Marker coordinate={markerCoords} >
+            <Callout>
+              <View style={styles.callout}>
+              <IconBtn color={Colors.primari300} size={35} iconName="add-circle" onPress={()=>{setShowModal(true)}}/>
+              </View>
+            </Callout>
+          </Marker>}
+        {plangeri.map((item, index) => (
+          <Marker
+            coordinate={{ latitude: item.latitude, longitude: item.longitude }}
+            key={`${item.id}-${index}`}
+          >
             <Callout>
               <MarkerInfo
                 id={item.id}
                 description={item.description}
                 status={item.status}
                 title={item.title}
-                key={item.id}
+                key={`${item.id}-${index}`}
               />
             </Callout>
           </Marker>
         ))}
+
       </MapView>
       <View style={styles.addBtnView}>
         <AddCommentBtn onPress={setShowModal} name="add-circle" />
       </View>
-      <AddReclamatieModal visible={showModal} onShowModal={setShowModal} />
+      <AddReclamatieModal
+        visible={showModal}
+        onShowModal={setShowModal}
+        addPlangere={(newPlangeri) =>
+          setPlangeri((prevPlangeri) => [...prevPlangeri, newPlangeri])
+        }
+        coordsFormPressingScreen = {markerCoords}
+      />
     </View>
   );
 }
@@ -123,6 +155,12 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1,
+  },
+  callout:{
+    height:50,
+    width:50,
+    alignItems:'center',
+    justifyContent:'center',
   },
   addBtnView: {
     marginBottom: -70,

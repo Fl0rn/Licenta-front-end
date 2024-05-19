@@ -10,20 +10,31 @@ type RequestItemProps = {
   id: string;
   date: number;
   status: string;
+  requestId:string
+  render: (value: (prevState: number) => number) => void;
 };
 export default function RequestItem({
   name,
   id,
   date,
   status,
+  requestId,
+  render,
 }: RequestItemProps) {
   const authCtx = useContext(AuthContext);
   async function handleRequest(url: string) {
-    axios.post(BACKEND_LINK + url, {
-      townHallAccountId: authCtx.userInfo?.id,
-      requestId: id,
-    });
+    try {
+      const response = await axios.post(BACKEND_LINK + url, {
+        townHallAccountId: authCtx.userInfo?.id,
+        requestId: requestId,
+      });
+      console.log("Response:", response.data);
+      render((prevState) => prevState + 1);
+    } catch (error) {
+      console.error("Error handling request:", error);
+    }
   }
+  
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
@@ -40,7 +51,7 @@ export default function RequestItem({
           <Text>{name}</Text>
         </View>
       </View>
-      {authCtx.userInfo?.acountType === 1 ? (
+      {authCtx.userInfo?.acountType === 2 ? (
         <View style={styles.btnView}>
           <RequestBtn title="Accept" handleRequest={handleRequest} />
           <View style={{ marginVertical: 3 }} />

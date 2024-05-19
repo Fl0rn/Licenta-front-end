@@ -13,6 +13,7 @@ type RequestModel = {
   city: string;
 };
 export default function AcceptRequestScreen() {
+  const [rerender,setRerender] = useState(0);
   const [requests, setRequests] = useState([
     {
       acountId: "",
@@ -26,18 +27,25 @@ export default function AcceptRequestScreen() {
 
   const authCtx = useContext(AuthContext);
   useEffect(() => {
-    try {
-      async function fetchRequests() {
+    async function fetchRequests() {
+      if (!authCtx.userInfo?.id) {
+        console.log("User ID is not available.");
+        return;
+      }
+      try {
+        console.log("userId", authCtx.userInfo?.id);
         const response = await axios.get(BACKEND_LINK + "/getAllRequest", {
           params: { accountId: authCtx.userInfo?.id },
         });
+        console.log("Fetched Requests: ", response.data);
         setRequests(response.data);
+      } catch (err) {
+        console.log(err);
       }
-      fetchRequests();
-    } catch (err) {
-      console.log(err);
     }
-  }, []);
+    fetchRequests();
+  }, [rerender, authCtx.userInfo]);
+
   async function newRequestHandler() {
     const data = {
       acountId: authCtx.userInfo?.id,
@@ -52,23 +60,27 @@ export default function AcceptRequestScreen() {
       console.error("Error adding request:", error);
     }
   }
+
+
   return (
     <View>
       <ProfileHeader showModlalHandler={() => {}} />
       <View style={styles.flatListView}>
-        <CustomOutlineBtn
+      {authCtx.userInfo?.acountType !==2 &&  <CustomOutlineBtn
           color={Colors.primari300}
           title="Aplica cont creator"
           onPress={newRequestHandler}
-        />
+        />}
         <FlatList
           data={requests}
           renderItem={({ item }) => (
             <RequestItem
               name={item.acountName}
+              requestId={item.requestId}
               date={item.date}
               id={item.acountId}
               status={item.status}
+              render={setRerender}
             />
           )}
           keyExtractor={(item) => item.acountId} 

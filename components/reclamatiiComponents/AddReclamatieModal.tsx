@@ -25,9 +25,13 @@ import {
 import axios from "axios";
 import { BACKEND_LINK } from "../../util/constants";
 import { AuthContext } from "../../store/auth-context";
+import { Plangeri } from "../../screens/ReclamatiiScreen";
+import { LatLng } from "react-native-maps";
 type AddReclamatieModalProps = {
   visible: boolean;
   onShowModal: (val: boolean) => void;
+  addPlangere: (val: Plangeri) => void;
+  coordsFormPressingScreen: LatLng | null;
 };
 type ReclamatiiType = {
   image: string;
@@ -38,20 +42,22 @@ type ReclamatiiType = {
 };
 type ReclamatiiToSend = {
   image: string;
-  accountName:string;
-  accountId:string;
-  title:string;
-  description:string;
-  status:string;
-  latitude:number;
-  longitude:number;
-}
+  accountName: string;
+  accountId: string;
+  title: string;
+  description: string;
+  status: string;
+  latitude: number;
+  longitude: number;
+};
 type LoadingType = {
   status: "no-location" | "fetching" | "finished";
 };
 export default function AddReclamatieModal({
   visible,
   onShowModal,
+  addPlangere,
+  coordsFormPressingScreen,
 }: AddReclamatieModalProps) {
   const authCtx = useContext(AuthContext);
   const [imagePickerModal, setImagePickerModal] = useState<boolean>(false);
@@ -101,23 +107,34 @@ export default function AddReclamatieModal({
     setLoading({ status: "finished" });
   }
   async function handleSubmit() {
-    const plangereToSend :ReclamatiiToSend = {
+
+      if(coordsFormPressingScreen){
+        values.latitude = coordsFormPressingScreen.latitude
+        values.longitude = coordsFormPressingScreen.longitude 
+      }
+
+    const plangereToSend: ReclamatiiToSend = {
+
       ...values,
       accountId: authCtx.userInfo?.id!,
       accountName: authCtx.userInfo?.nume!,
-      status:'asd'
+      status: "in lucru",
     };
-    console.log(plangereToSend)
+    console.log(plangereToSend);
     try {
       const response = await axios.post(
         BACKEND_LINK + "/addNewPlangere",
         plangereToSend
       );
-      if(response.status === 200){
+      if (response.status === 200) {
         onShowModal(false);
       }
+      console.log(response.data);
+      const newPlangeri: Plangeri = response.data;
+      addPlangere(newPlangeri);
     } catch (err) {
       console.log(err);
+    } finally {
     }
   }
   return (
@@ -145,40 +162,44 @@ export default function AddReclamatieModal({
             onPress={() => setImagePickerModal(true)}
           />
           <View>
-            <Text>Titlu</Text>
             <TextInput
               style={styles.textInput}
               onChangeText={(enteredValue) =>
                 handelValues("title", enteredValue)
               }
+              placeholder="Titlu"
+              placeholderTextColor={Colors.gray300}
             />
           </View>
           <View>
-            <Text>Descriere</Text>
             <TextInput
               multiline
               blurOnSubmit
-              style={styles.textInput}
+              style={[styles.textInput, { height: 100 }]}
               onChangeText={(enteredText) =>
                 handelValues("description", enteredText)
               }
+              placeholder="Descriere"
+              placeholderTextColor={Colors.gray300}
             />
           </View>
-          <View style={styles.locationView}>
-            <Text>Locatia mea</Text>
-            {loading.status === "no-location" && (
-              <IconBtn
-                color="black"
-                iconName="locate-outline"
-                size={30}
-                onPress={getLocationHandler}
-              />
-            )}
-            {loading.status === "fetching" && <ActivityIndicator />}
-            {loading.status === "finished" && (
-              <Ionicons name="checkmark" size={24} color="green" />
-            )}
-          </View>
+          {!coordsFormPressingScreen && (
+            <View style={styles.locationView}>
+              <Text style={styles.locatieText}>Locatia mea</Text>
+              {loading.status === "no-location" && (
+                <IconBtn
+                  color="black"
+                  iconName="locate-outline"
+                  size={30}
+                  onPress={getLocationHandler}
+                />
+              )}
+              {loading.status === "fetching" && <ActivityIndicator />}
+              {loading.status === "finished" && (
+                <Ionicons name="checkmark" size={24} color="green" />
+              )}
+            </View>
+          )}
           <Button title="Adauga" onPress={handleSubmit} />
           <Button title="Anulare" onPress={() => onShowModal(false)} />
         </View>
@@ -196,12 +217,16 @@ const styles = StyleSheet.create({
   content: {
     width: "80%",
     height: "80%",
-    backgroundColor: Colors.gray500,
+    backgroundColor: "white",
     padding: 20,
+    borderRadius: 10,
   },
   title: {
     textAlign: "center",
     fontWeight: "bold",
+    fontSize: 20,
+    color: Colors.primari300,
+    paddingBottom: 10,
   },
   imageContainer: {
     width: "90%",
@@ -215,11 +240,21 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: Colors.gray700,
-    width: "80%",
+    padding: 10,
+    margin: 10,
+    borderRadius: 8,
+    width: "90%",
+    alignSelf: "center",
   },
+
   locationView: {
     flexDirection: "row",
     margin: 30,
     alignItems: "center",
+    alignSelf: "center",
+  },
+  locatieText: {
+    padding: 10,
+    fontSize: 17,
   },
 });

@@ -17,9 +17,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackPrams } from "../App";
 import { Colors } from "../util/Colors";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AddEventState } from "../components/eventComponents/AddEventForm";
 import timestampToDate from "../util/methods";
+import { AuthContext } from "../store/auth-context";
 interface Event {
   id: string;
   creatorId: string;
@@ -35,6 +36,7 @@ interface Event {
 }
 type Props = StackNavigationProp<RootStackPrams,'EventScreen'>
 export default function EvemtsSreen() {
+  const authCtx = useContext(AuthContext)
   const navigation = useNavigation<StackNavigationProp<RootStackPrams>>();
   function hadlePress() {
     navigation.replace("AddEvent");
@@ -64,12 +66,12 @@ export default function EvemtsSreen() {
           <Text style={styles.title}>Evenimente </Text>
         </View>
         <View>
-          <IconBtn
+         {authCtx.userInfo?.acountType! > 0 && <IconBtn
             iconName="add-circle"
             size={46}
             color={Colors.primari300}
             onPress={hadlePress}
-          />
+          />}
         </View>
       </View>
       
