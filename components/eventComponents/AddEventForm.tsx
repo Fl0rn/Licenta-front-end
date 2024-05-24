@@ -24,8 +24,9 @@ import Geocoder from 'react-native-geocoding';
 import axios from "axios";
 import { AuthContext } from "../../store/auth-context";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackPrams } from "../../App";
+
 import { convertImageToBase64 } from "../../util/methods";
+import { RootStackPrams } from "../../stack/Non-authenticated";
 export type AddEventState = {
   imagine: string;
   titlu: string;
@@ -143,6 +144,8 @@ export default function AddEventForm() {
           label="Categorie eveniment"
           icon="body-outline"
           onHandleInput={valuesHandler}
+          width={338}
+          height={50}
         />
 
         <View style={styles.dateTimeContainer}>
@@ -173,6 +176,8 @@ export default function AddEventForm() {
           label="Oras"
           icon="location-outline"
           onHandleInput={valuesHandler}
+          width={338}
+          height={50}
         />
       
           <View style={styles.inputContainer}>

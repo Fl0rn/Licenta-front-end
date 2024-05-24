@@ -14,13 +14,14 @@ import EventItem from "../components/eventComponents/EventItem";
 import IconBtn from "../components/UI/IconBttn";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackPrams } from "../App";
+
 import { Colors } from "../util/Colors";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AddEventState } from "../components/eventComponents/AddEventForm";
 import timestampToDate from "../util/methods";
 import { AuthContext } from "../store/auth-context";
+import { RootStackPrams } from "../stack/AppContext";
 interface Event {
   id: string;
   creatorId: string;

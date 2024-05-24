@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Ionicons } from "@expo/vector-icons";
-import {useState} from 'react';
+
 const data = [
   { label: 'Divertisment', value: '1' },
   { label: 'Cultural', value: '2' },
@@ -9,22 +10,39 @@ const data = [
   { label: 'Targuri', value: '4' },
   { label: 'Concerte', value: '5' },
   { label: 'Conferinte', value: '6' },
-
 ];
-const orase=[
+
+const orase = [
   { label: 'Timisoara', value: '1' },
   { label: 'Oradea', value: '2' },
   { label: 'Cluj', value: '3' },
   { label: 'Bucuresti', value: '4' },
   { label: 'Constanta', value: '5' },
-]
-type DropdownComponentProps ={
-  label:string,
-  mode:string,
-  icon:"location-outline"|"body-outline"
-  onHandleInput:(value: string | number | [number, number], name: string) => void; 
-}
-const DropdownComponent = ({label,mode,icon,onHandleInput}:DropdownComponentProps) => {
+];
+
+const status = [
+  { label: 'In lucru', value: '1' },
+  { label: 'Neabordata', value: '2' },
+  { label: 'Finalizata', value: '3' },
+];
+
+type DropdownComponentProps = {
+  label: string,
+  mode: string,
+  width: number,
+  height: number,
+  icon: "location-outline" | "body-outline" | "hammer-outline",
+  onHandleInput: (value: string | number | [number, number], name: string) => void,
+};
+
+const DropdownComponent = ({
+  label = '',
+  mode = '',
+  icon = 'location-outline',
+  onHandleInput = () => {},
+  width = 200,
+  height = 50
+}: DropdownComponentProps) => {
   const [value, setValue] = useState<string>("");
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -39,16 +57,38 @@ const DropdownComponent = ({label,mode,icon,onHandleInput}:DropdownComponentProp
     return null;
   };
 
+  const getDropdownData = () => {
+    if (mode === "eventtype") {
+      return data;
+    } else if (mode === "city") {
+      return orase;
+    } else if (mode === "Status") {
+      return status;
+    } else {
+      return [];
+    }
+  };
+
+  const handleInput = (label: string) => {
+    if (mode === "city") {
+      onHandleInput(label, "oras");
+    } else if (mode === "Status") {
+      onHandleInput(label, "status");
+    } else {
+      onHandleInput(label, "tip");
+    }
+  };
+
   return (
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+        style={[styles.dropdown, isFocus && { borderColor: 'blue' }, { width: width, height: height }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
-        data={mode === "eventtype"?data : orase}
+        data={getDropdownData()}
         search
         maxHeight={300}
         labelField="label"
@@ -59,7 +99,7 @@ const DropdownComponent = ({label,mode,icon,onHandleInput}:DropdownComponentProp
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={item => {
-          onHandleInput(item.label,mode === "city" ? "oras" : "tip");
+          handleInput(item.label);
           setIsFocus(false);
         }}
         renderLeftIcon={() => (
@@ -83,13 +123,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   dropdown: {
-    height: 50,
-    width:338,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
-
   },
   icon: {
     marginRight: 5,

@@ -11,8 +11,9 @@ import { BACKEND_LINK, STATUS_UTILIZATOR } from "../util/constants";
 import { convertImageToBase64 } from "../util/methods";
 import ProfileHeader from "../components/profileComponents/ProfileHeader";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackPrams } from "../App";
+
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackPrams } from "../stack/AppContext";
 type UpdatePhoto = {
   userId: string;
   base64Photo: string;
@@ -32,7 +33,7 @@ export function ProfileScreen(){
         userId: authCtx.userInfo!.id,
         base64Photo: bytesImage,
       };
-     console.log(values.userId,typeof(values.userId))
+    
       await axios.put(BACKEND_LINK + "/updateProfilePicture", values);
       setRerenderKey((prevKey) => prevKey + 1);
       setIsModalVisible(false);

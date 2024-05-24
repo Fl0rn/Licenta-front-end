@@ -126,6 +126,11 @@ export const ButtonTypes = [
   "Culturale",
   "Conferinte",
 ];
+export const StatusButtons =[
+  "In lucru",
+  "Neabordat",
+  "Terminat"
+]
 export const API_KEY = "AIzaSyB7pHjqFGroA6xaKMHNdTdIGz14psqe-7o";
 export const BACKEND_LINK = "http://192.168.0.127:3000";
 export const TIMISOARA_POLIGON = [

@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { BACKEND_LINK } from "../../util/constants";
 import { Colors } from "../../util/Colors";
+import { getPlangeriStatusColor } from "../../util/methods";
 type MarkerInfoProps = {
   title: string;
   status: string;
@@ -17,7 +18,7 @@ export default function MarkerInfo({
     <View style={styles.container}>
       <View style={styles.titleView}>
         <Text style={styles.text}>{title}</Text>
-        <Text>{status}</Text>
+        <Text style={{color:getPlangeriStatusColor(status)}}>{status}</Text>
       </View>
       <View style={styles.detailsView}>
        

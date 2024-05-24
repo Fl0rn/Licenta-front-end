@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { RootStackPrams } from "../App";
+
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { API_KEY, BACKEND_LINK, TIMISOARA } from "../util/constants";
@@ -29,6 +29,7 @@ import CommentsContainer from "../components/eventComponents/CommentsContainer";
 import AddCommentBtn from "../components/UI/AddCommentBtn";
 import AddCommentsModal from "../components/UI/AddCommentsModal";
 import { AuthContext } from "../store/auth-context";
+import { RootStackPrams } from "../stack/Non-authenticated";
 
 type Props = StackScreenProps<RootStackPrams, "DetailPage">;
 

@@ -14,7 +14,7 @@ import { Colors } from "../../util/Colors";
 import IconBtn from "../UI/IconBttn";
 import ImagePickerModal from "../UI/ImagePickerModal";
 import { useContext, useState } from "react";
-import { convertImageToBase64 } from "../../util/methods";
+import { convertImageToBase64} from "../../util/methods";
 import { verifyPermissions } from "../../util/permissions";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -25,14 +25,17 @@ import {
 import axios from "axios";
 import { BACKEND_LINK } from "../../util/constants";
 import { AuthContext } from "../../store/auth-context";
-import { Plangeri } from "../../screens/ReclamatiiScreen";
+
 import { LatLng } from "react-native-maps";
+import { insertPlangeri } from "../../util/database";
+import { Plangeri } from "./UserCreatorPage";
 type AddReclamatieModalProps = {
   visible: boolean;
   onShowModal: (val: boolean) => void;
   addPlangere: (val: Plangeri) => void;
   coordsFormPressingScreen: LatLng | null;
-};
+  setCoordsFormPressingScreen:(val:LatLng | null) => void
+  }
 type ReclamatiiType = {
   image: string;
   title: string;
@@ -40,13 +43,14 @@ type ReclamatiiType = {
   latitude: number;
   longitude: number;
 };
-type ReclamatiiToSend = {
+export type ReclamatiiToSend = {
   image: string;
   accountName: string;
   accountId: string;
   title: string;
   description: string;
   status: string;
+ 
   latitude: number;
   longitude: number;
 };
@@ -58,6 +62,7 @@ export default function AddReclamatieModal({
   onShowModal,
   addPlangere,
   coordsFormPressingScreen,
+  setCoordsFormPressingScreen
 }: AddReclamatieModalProps) {
   const authCtx = useContext(AuthContext);
   const [imagePickerModal, setImagePickerModal] = useState<boolean>(false);
@@ -112,15 +117,20 @@ export default function AddReclamatieModal({
         values.latitude = coordsFormPressingScreen.latitude
         values.longitude = coordsFormPressingScreen.longitude 
       }
+      
 
-    const plangereToSend: ReclamatiiToSend = {
-
-      ...values,
+      const plangereToSend: ReclamatiiToSend = {
+        
+        ...values,
+      
       accountId: authCtx.userInfo?.id!,
       accountName: authCtx.userInfo?.nume!,
       status: "in lucru",
     };
-    console.log(plangereToSend);
+    
+    //const result = insertPlangeri(plangereToSend);
+    //console.log("result Changes BREAAAAAAAAAAAAAAAAA",(await result).changes)
+   // console.log("result lastInsertRowId BREAAAAAAAAAAAAAAAAA",(await result).lastInsertRowId)
     try {
       const response = await axios.post(
         BACKEND_LINK + "/addNewPlangere",
@@ -135,6 +145,7 @@ export default function AddReclamatieModal({
     } catch (err) {
       console.log(err);
     } finally {
+      setCoordsFormPressingScreen(null)
     }
   }
   return (

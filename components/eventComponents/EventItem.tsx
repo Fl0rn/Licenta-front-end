@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import timestampToDate from "../../util/methods";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,7 +18,7 @@ export default function EventItem({image,data,titlu,onPressToNavigate,id}:EventP
   }
 
   return (
-    <Pressable style={styles.container} onPress={()=>onPressToNavigate(id)}>
+    <TouchableOpacity style={styles.container} onPress={()=>onPressToNavigate(id)}>
       <View style={styles.imageContainer}>
         <Image source={{uri:image}} style={styles.image}/>
       </View>
@@ -36,7 +36,7 @@ export default function EventItem({image,data,titlu,onPressToNavigate,id}:EventP
           </View>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
