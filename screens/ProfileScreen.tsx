@@ -65,7 +65,7 @@ export function ProfileScreen(){
         >
           <Ionicons
             name="mail-outline"
-            color={Colors.gray300}
+            color="white"
             size={24}
             style={styles.icons}
           />
@@ -75,7 +75,7 @@ export function ProfileScreen(){
         <View style={styles.infoView}>
           <Ionicons
             name="location-outline"
-            color={Colors.gray300}
+            color="white"
             size={24}
             style={styles.icons}
           />
@@ -84,7 +84,7 @@ export function ProfileScreen(){
         <View style={styles.infoView}>
           <Ionicons
             name="calendar-outline"
-            color={Colors.gray300}
+            color="white"
             size={24}
             style={styles.icons}
           />
@@ -93,7 +93,7 @@ export function ProfileScreen(){
         <View style={styles.infoView}>
           <Ionicons
             name="person-outline"
-            color={Colors.gray300}
+            color="white"
             size={24}
             style={styles.icons}
           />
@@ -120,6 +120,7 @@ export function ProfileScreen(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:Colors.secondary300
   },
 
   
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
   acountTypeText: {
     textAlign: "center",
     marginTop: 40,
+    color:'white',
     fontWeight: "bold",
     fontSize: 20,
   },
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     marginRight: 60,
-
+    color:'white',
     fontSize: 17,
   },
   buttonsContainer: {

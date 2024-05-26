@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   addBtnView: {
-    marginBottom: -70,
+    marginBottom: -30,
   },
   infoBtnView:{
     marginBottom:90

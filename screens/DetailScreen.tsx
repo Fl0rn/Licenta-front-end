@@ -14,7 +14,12 @@ import {
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { API_KEY, BACKEND_LINK, TIMISOARA } from "../util/constants";
-import timestampToDate, { formatTime } from "../util/methods";
+import timestampToDate, {
+  formatTime,
+  getDayOfMonth,
+  getDayOfWeek,
+  getMonthAbbreviation,
+} from "../util/methods";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../util/Colors";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -30,6 +35,7 @@ import AddCommentBtn from "../components/UI/AddCommentBtn";
 import AddCommentsModal from "../components/UI/AddCommentsModal";
 import { AuthContext } from "../store/auth-context";
 import { RootStackPrams } from "../stack/Non-authenticated";
+import TextIconBtn from "../components/UI/TextIconBtn";
 
 type Props = StackScreenProps<RootStackPrams, "DetailPage">;
 
@@ -62,15 +68,11 @@ export default function DetailScreen({ route }: Props) {
     };
     try {
       console.log(commentToSend);
-      await axios.post(
-        BACKEND_LINK + "/addComent",
-        commentToSend
-      );
-      
+      await axios.post(BACKEND_LINK + "/addComent", commentToSend);
     } catch (err) {
       console.log(err);
-    }finally{
-      setRenderComments((prevState) => prevState + 1)
+    } finally {
+      setRenderComments((prevState) => prevState + 1);
       setShowModal(false);
     }
   }
@@ -122,7 +124,7 @@ export default function DetailScreen({ route }: Props) {
   function showModalHandler(bol: boolean) {
     setShowModal(bol);
   }
-console.log(values.coordonate)
+  console.log(values.coordonate);
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -137,25 +139,42 @@ console.log(values.coordonate)
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{values.titlu}</Text>
         <Text style={styles.adresa}>{values.adresa}</Text>
+
         <View style={styles.dateTimeContainer}>
-          <View style={styles.iconContainer}>
-            <Ionicons
-              name="calendar-outline"
-              color={Colors.gray300}
-              size={20}
-              style={{ padding: 10 }}
-            />
-            <Text>{timestampToDate(values.dataTimp)}</Text>
+          <View style={styles.leftInfoView}>
+            <View
+              style={[
+                styles.iconContainer,
+                { borderRightWidth: 1, borderRightColor: Colors.gray300 },
+              ]}
+            >
+              <Text style={styles.mounthText}>
+                {getMonthAbbreviation(values.dataTimp)}
+              </Text>
+              <Text style={styles.dayOfTheMounth}>
+                {getDayOfMonth(values.dataTimp)}
+              </Text>
+            </View>
+
+            <View style={[styles.iconContainer, { marginLeft: 30 }]}>
+              <Text style={[styles.getDayOfWeek, { paddingBottom: 10 }]}>
+                {getDayOfWeek(values.dataTimp)}
+              </Text>
+              <Text style={styles.mounthText}>
+                {formatTime(values.dataTimp)}
+              </Text>
+            </View>
           </View>
-          <View style={styles.iconContainer}>
-            <Ionicons
-              name="time-outline"
-              color={Colors.gray300}
-              size={20}
-              style={{ padding: 10 }}
-            />
-            <Text>{formatTime(values.dataTimp)}</Text>
-          </View>
+
+          <TextIconBtn
+            height={60}
+            width={60}
+            iconColor="white"
+            iconSize={30}
+            text="Add"
+            iconName="calendar"
+            backgroundColor={Colors.primari300}
+          />
         </View>
       </View>
       <View style={styles.detailsContainer}>
@@ -168,6 +187,7 @@ console.log(values.coordonate)
               style={styles.map}
               initialRegion={TIMISOARA}
               //provider={PROVIDER_GOOGLE}
+              mapType="hybridFlyover"
             >
               <Marker coordinate={coords} />
               <Marker coordinate={location} />
@@ -180,13 +200,22 @@ console.log(values.coordonate)
           </View>
           <CommentsContainer comments={values.comentarii} />
         </ScrollView>
-        <AddCommentBtn onPress={showModalHandler} name="maps-ugc"/>
+        <View>
+          <AddCommentBtn
+            onPress={showModalHandler}
+            name="maps-ugc"
+            height={40}
+            width={40}
+            backgroundColor={Colors.primari300}
+            iconColor="white"
+            iconSize={40}
+          />
+        </View>
         <AddCommentsModal
           isVisible={showModal}
           onPress={showModalHandler}
           onSetComment={setComment}
           onSubmitHandler={handleSubmit}
-         
         />
       </View>
     </View>
@@ -195,9 +224,10 @@ console.log(values.coordonate)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.secondary300,
   },
   imageContainer: {
-    height: 200,
+    height: 250,
   },
   image: {
     height: "100%",
@@ -210,38 +240,64 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 24,
+    color: Colors.primari300,
+    padding: 7,
   },
   adresa: {
     fontSize: 15,
+    color: Colors.gray500,
   },
   dateTimeContainer: {
     flexDirection: "row",
+    backgroundColor: Colors.secondary500,
+    borderRadius: 10,
+    alignItems: "center",
     justifyContent: "space-between",
     marginTop: 10,
+    padding: 17,
     paddingHorizontal: 20,
   },
   iconContainer: {
-    flexDirection: "row",
+    paddingRight: 15,
     alignItems: "center",
   },
+  mounthText: {
+    color: Colors.gray500
+  },
+  leftInfoView: {
+    flexDirection: "row",
+  },
+  getDayOfWeek: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "500",
+  },
+  dayOfTheMounth: {
+    color: Colors.primari300,
+    fontSize: 24,
+  },
   detailsContainer: {
-    height: 600,
+    height: 530,
     paddingHorizontal: 10,
     paddingBottom: 100,
   },
   descriereContainer: {
+    alignSelf:'center',
     marginVertical: 20,
-    backgroundColor: Colors.gray500,
+    backgroundColor:Colors.secondary500,
+    width:"92%",
     borderRadius: 8,
   },
 
   descriereText: {
     padding: 10,
+    textAlign:'center',
+    color:Colors.gray500
   },
   mapView: {
     height: 200,
     width: "100%",
-    backgroundColor:'white',
+    backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
       width: 5,

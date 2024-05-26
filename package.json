@@ -19,6 +19,7 @@
     "axios": "^1.6.7",
     "expo": "^51.0.2",
     "expo-app-loading": "^2.1.1",
+    "expo-blur": "~13.0.2",
     "expo-camera": "~15.0.6",
     "expo-image-picker": "~15.0.4",
     "expo-linear-gradient": "~13.0.2",
@@ -37,6 +38,7 @@
     "react-native-maps": "1.14.0",
     "react-native-maps-directions": "^1.9.0",
     "react-native-reanimated": "~3.10.1",
+    "react-native-svg": "15.2.0",
     "react-redux": "^9.1.1"
   },
   "devDependencies": {

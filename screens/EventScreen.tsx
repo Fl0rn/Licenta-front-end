@@ -70,7 +70,7 @@ export default function EvemtsSreen() {
          {authCtx.userInfo?.acountType! > 0 && <IconBtn
             iconName="add-circle"
             size={46}
-            color={Colors.primari300}
+            color={Colors.primary500}
             onPress={hadlePress}
           />}
         </View>
@@ -120,14 +120,16 @@ export default function EvemtsSreen() {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    paddingTop: 50,
+    backgroundColor:Colors.secondary300,
+    flex:1
   },
   topContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   title: {
-    color: Colors.primari300,
+    color: Colors.primary500,
     fontSize: 28,
     margin: 10,
   },

@@ -2,6 +2,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { BACKEND_LINK, dummyComments } from "../../util/constants";
 import timestampToDate from "../../util/methods";
+import { Colors } from "../../util/Colors";
 type CommentsProps = {
   authorEmail: string;
   author: string;
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     container:{
        
         margin:15,
-        backgroundColor:'white',
+        backgroundColor:Colors.secondary500,
         padding:5,
         borderRadius:5,
         flexDirection:'row',
@@ -59,9 +60,11 @@ const styles = StyleSheet.create({
     },
     numeAutor:{
         fontWeight:'bold',
-        fontSize:20
+        fontSize:20,
+        color:Colors.gray500
     },
     mesaj:{
         paddingBottom:10,
-    }
+        color:'white'
+      }
 })

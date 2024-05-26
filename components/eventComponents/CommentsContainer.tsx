@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 25,
     marginLeft: 20,
+    color:'white'
   },
   lengthContainer: {
     backgroundColor: Colors.primari300,
