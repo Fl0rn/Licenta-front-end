@@ -1,4 +1,5 @@
 import * as FileSystem from "expo-file-system";
+import { Event } from "../screens/EventScreen";
 
 export default function timestampToDate(timestamp: number) {
   const months = [
@@ -44,12 +45,25 @@ export function timestampToDateShort(timestamp: number) {
 
   return `${day} ${month}`;
 }
-export function getMonthAbbreviation(timestamp:number) {
+export function getMonthAbbreviation(timestamp: number) {
   const date = new Date(timestamp);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   return months[date.getMonth()];
 }
-export function getDayOfMonth(timestamp:number) {
+export function getDayOfMonth(timestamp: number) {
   const date = new Date(timestamp);
   return date.getDate();
 }
@@ -60,12 +74,18 @@ export function formatTime(timestamp: number) {
   const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${hours}:${minutes}`;
 }
-export function getDayOfWeek(timestamp:number) {
+export function getDayOfWeek(timestamp: number) {
   const date = new Date(timestamp);
   const dayIndex = date.getDay();
 
   const daysOfWeek = [
-    "Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"
+    "Duminică",
+    "Luni",
+    "Marți",
+    "Miercuri",
+    "Joi",
+    "Vineri",
+    "Sâmbătă",
   ];
 
   return daysOfWeek[dayIndex];
@@ -79,9 +99,34 @@ export function getPlangeriStatusColor(status: string) {
     case "Finalizata":
       return "#009c4a";
     default:
-      return "white"; 
+      return "white";
   }
 }
+export function formatTimestamp(timestamp: number): string {
+  const date = new Date(timestamp * 1000);
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()];
+
+  const formattedDate = `${day} ${month}`;
+  return formattedDate;
+}
+
 export const convertImageToBase64 = async (uri: string) => {
   try {
     const base64String = await FileSystem.readAsStringAsync(uri, {
@@ -93,3 +138,11 @@ export const convertImageToBase64 = async (uri: string) => {
     throw error;
   }
 };
+export function verifyParticipant(
+  arrayOfParticipants: string[],
+  userId: string
+) {
+  if (arrayOfParticipants.includes(userId)) {
+    return true;
+  } else return false;
+}

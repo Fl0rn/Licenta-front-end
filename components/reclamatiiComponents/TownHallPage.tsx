@@ -14,7 +14,9 @@ type TownHallPlangeriReq = {
 
 export default function TownHallPage() {
   const [showModal, setShowModal] = useState(false);
-  const [forcedRerender,setForceRerender] = useState(0)
+  const [forcedRerender, setForceRerender] = useState(0);
+  const [filters, setFilters] = useState<string[]>([]);
+  const [plangeriCopy,setPlangeriCopy] = useState<TownHallPlangeri[]>([])
   const [plangeri, setPlangeri] = useState<TownHallPlangeri[]>([
     {
       accountId: "",
@@ -44,6 +46,7 @@ export default function TownHallPage() {
   async function fetchPlangeri() {
     const response = await getAllPlangeri();
     setPlangeri(response);
+    setPlangeriCopy(response)
   }
   useEffect(() => {
     fetchPlangeri();
@@ -53,37 +56,72 @@ export default function TownHallPage() {
 
     const response = await getPlangereId(id);
     setPlangere(response);
+    
   }
 
+  function handleAddFilters(status: string) {
+    if (filters?.includes(status)) {
+      const newFilters = filters.filter((item) => item !== status);
+      setFilters(newFilters);
+    } else {
+      setFilters((prevState) => [...prevState, status]);
+    }
+  }
+  
+  function filterItems() {
+    if (filters.length > 0) {
+      let tempItems = filters.map((selectedCategory) => {
+        let temp = plangeri.filter((pl) => pl.status === selectedCategory);
+        return temp;
+      });
+      
+      setPlangeri(tempItems.flat());
+    } else {
+      setPlangeri([...plangeriCopy]);
+    }
+  }
 
+  useEffect(() => {
+    filterItems();
+  }, [filters]);
+ 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Plangeri</Text>
+      
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.buttonsView}>
-          {StatusButtons.map((status) => (
-            <CustomOutlineBtn
-              color={Colors.primari300}
-              title={status}
-              onPress={() => {}}
-              key={status}
-            />
-          ))}
+        <View style={styles.btnContainer}>
+          <View style={styles.buttonsView}>
+            {StatusButtons.map((status) => (
+              <CustomOutlineBtn
+                color={Colors.primari300}
+                title={status}
+                onPress={() => {handleAddFilters(status)}}
+                key={status}
+                height={40}
+                width={100}
+                disabled={false}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
-      <FlatList
-        data={plangeri}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ReclamatiiItem plangereObj={item} onShowModal={showModalHandler} />
-        )}
-      />
+
+      <View style={styles.flatList}>
+        <FlatList
+          data={plangeri}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <ReclamatiiItem plangereObj={item} onShowModal={showModalHandler} />
+          )}
+        />
+      </View>
+
       <DetailPlangeriModal
         visible={showModal}
         plangere={plangere}
         onCloseModal={setShowModal}
         rerender={setForceRerender}
-
       />
     </View>
   );
@@ -92,8 +130,12 @@ export default function TownHallPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 50,
+    justifyContent: "space-around",
+    backgroundColor: Colors.secondary300,
+  },
+  btnContainer: {
     marginTop: 50,
-    alignContent: "center",
   },
   buttonsView: {
     flexDirection: "row",
@@ -102,5 +144,8 @@ const styles = StyleSheet.create({
     color: Colors.primari300,
     fontSize: 28,
     margin: 10,
+  },
+  flatList: {
+    flex: 10,
   },
 });

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 type TextIconBtn = {
     iconSize:number,
@@ -8,14 +8,15 @@ type TextIconBtn = {
     width:number,
     iconName:any,
     backgroundColor:string,
+    onPress:()=>void
 }
-export default function TextIconBtn({iconColor,iconSize,text,height,width,iconName,backgroundColor}:TextIconBtn){
-    return <Pressable>
+export default function TextIconBtn({iconColor,iconSize,text,height,width,iconName,backgroundColor,onPress}:TextIconBtn){
+    return <TouchableOpacity onPress={onPress}>
         <View style={[{height:height,width:width,backgroundColor:backgroundColor},styles.container]}>
             <Ionicons name={iconName} size={iconSize} color={iconColor}/>
             <Text style={styles.text}>{text}</Text>
         </View>
-    </Pressable>
+    </TouchableOpacity>
 }
 const styles = StyleSheet.create({
     container:{

@@ -1,0 +1,76 @@
+Date : 2024-06-21 13:13:46
+Directory : d:\faculta\AN3Sem2\Licenta\proiectFinal
+Total : 37 files,  1120 codes, 0 comments, 42 blanks, all 1162 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         32 |        909 |          0 |         35 |        944 |
+| JSON           |          2 |        168 |          0 |          0 |        168 |
+| TypeScript     |          2 |         40 |          0 |          6 |         46 |
+| XML            |          1 |          3 |          0 |          1 |          4 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                   | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                      |         37 |      1,120 |          0 |         42 |      1,162 |
+| . (Files)                                                                                              |          2 |        168 |          0 |          0 |        168 |
+| components                                                                                             |         24 |        658 |          0 |         34 |        692 |
+| components (Files)                                                                                     |          1 |          9 |          0 |          0 |          9 |
+| components\UI                                                                                          |          9 |        146 |          0 |          2 |        148 |
+| components\eventComponents                                                                             |          5 |        104 |          0 |          4 |        108 |
+| components\profileComponents                                                                           |          3 |         50 |          0 |          7 |         57 |
+| components\profileComponents (Files)                                                                   |          1 |         39 |          0 |          6 |         45 |
+| components\profileComponents\requestComponents                                                         |          2 |         11 |          0 |          1 |         12 |
+| components\reclamatiiComponents                                                                        |          6 |        349 |          0 |         21 |        370 |
+| screens                                                                                                |          5 |        202 |          0 |         -3 |        199 |
+| stack                                                                                                  |          2 |         47 |          0 |          4 |         51 |
+| util                                                                                                   |          4 |         45 |          0 |          7 |         52 |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                               | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\AddCommentBtn.tsx                                | TypeScript JSX |          3 |          0 |          1 |          4 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\AddCommentsModal.tsx                             | TypeScript JSX |         18 |          0 |         -1 |         17 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\BtnTapsIcon.tsx                                  | TypeScript JSX |         29 |          0 |          0 |         29 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\CustomOutlineBtn.tsx                             | TypeScript JSX |          6 |          0 |          0 |          6 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\DateTimePicker.tsx                               | TypeScript JSX |         15 |          0 |         -3 |         12 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\DropdownComponent.tsx                            | TypeScript JSX |         37 |          0 |          5 |         42 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\EventTypeBtn.tsx                                 | TypeScript JSX |          5 |          0 |          0 |          5 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\GooglePlacesInput.tsx                            | TypeScript JSX |          3 |          0 |         -1 |          2 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\TextIconBtn.tsx                                  | TypeScript JSX |         30 |          0 |          1 |         31 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\AddEventForm.tsx                    | TypeScript JSX |         11 |          0 |          1 |         12 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\CommentItem.tsx                     | TypeScript JSX |         13 |          0 |          0 |         13 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\CommentsContainer.tsx               | TypeScript JSX |          1 |          0 |          0 |          1 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\EventItem.tsx                       | TypeScript JSX |         11 |          0 |          2 |         13 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\InterestedPeopleComponent.tsx       | TypeScript JSX |         68 |          0 |          1 |         69 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\http.tsx                                            | TypeScript JSX |          9 |          0 |          0 |          9 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\ProfileHeader.tsx                 | TypeScript JSX |         39 |          0 |          6 |         45 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\requestComponents\RequestBtn.tsx  | TypeScript JSX |          3 |          0 |          0 |          3 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\requestComponents\RequestItem.tsx | TypeScript JSX |          8 |          0 |          1 |          9 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\DetailPlangeriModal.tsx        | TypeScript JSX |        190 |          0 |          4 |        194 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\LegendaModal.tsx               | TypeScript JSX |         68 |          0 |          6 |         74 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\MarkerInfo.tsx                 | TypeScript JSX |          1 |          0 |          0 |          1 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\ReclamatiiItem.tsx             | TypeScript JSX |         10 |          0 |          0 |         10 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\TownHallPage.tsx               | TypeScript JSX |         69 |          0 |         11 |         80 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\UserCreatorPage.tsx            | TypeScript JSX |         11 |          0 |          0 |         11 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\package-lock.json                                              | JSON           |        166 |          0 |          0 |        166 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\package.json                                                   | JSON           |          2 |          0 |          0 |          2 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\AcceptRequsetScreen.tsx                                | TypeScript JSX |         10 |          0 |         -1 |          9 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\DetailScreen.tsx                                       | TypeScript JSX |        124 |          0 |          2 |        126 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\EventScreen.tsx                                        | TypeScript JSX |         57 |          0 |         -5 |         52 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\ProfileScreen.tsx                                      | TypeScript JSX |          6 |          0 |         -1 |          5 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\UpcomingEvents.tsx                                     | TypeScript JSX |          5 |          0 |          2 |          7 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\AppContext.tsx                                           | TypeScript JSX |          3 |          0 |          0 |          3 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\BtnTapsNavigation.tsx                                    | TypeScript JSX |         44 |          0 |          4 |         48 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\util\Colors.ts                                                 | TypeScript     |          5 |          0 |          2 |          7 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\util\Line 3.svg                                                | XML            |          3 |          0 |          1 |          4 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\util\constants.tsx                                             | TypeScript JSX |          2 |          0 |          0 |          2 |
+| d:\faculta\AN3Sem2\Licenta\proiectFinal\util\methods.ts                                                | TypeScript     |         35 |          0 |          4 |         39 |
+| Total                                                                                                  |                |      1,120 |          0 |         42 |      1,162 |
++--------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

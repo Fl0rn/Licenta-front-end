@@ -77,7 +77,7 @@ export default function ReclamatiiItem({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: Colors.secondary400,
     marginVertical: 10,
     marginHorizontal: 15,
     flexDirection: "row",
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "600",
     fontSize: 20,
-    color: Colors.primari300,
+    color: Colors.primary500,
     paddingLeft: 10,
   },
   status:{
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontSize:16
   },
   text: {
-    color: Colors.gray300,
+    color: Colors.gray500,
     fontSize: 15,
     flexShrink: 1,
     fontWeight: "400",

@@ -40,7 +40,7 @@ export default function BtnTaps() {
           tabBarIcon: ({ focused, color }) => (
             focused ?  (
               <BtnTapsIcon
-                iconName="calendar" // Replace with your non-focused icon name
+                iconName="calendar" 
                text="Event"
                 color={color}
               />
@@ -67,7 +67,7 @@ export default function BtnTaps() {
           tabBarIcon: ({ focused, color }) => (
             focused ?  (
               <BtnTapsIcon
-                iconName="map" // Replace with your non-focused icon name
+                iconName="map" 
                text="Plangeri"
                 color={color}
               />
@@ -93,7 +93,7 @@ export default function BtnTaps() {
           tabBarIcon: ({ focused, color }) => (
             focused ?  (
               <BtnTapsIcon
-                iconName="person" // Replace with your non-focused icon name
+                iconName="person" 
                text="Profil"
                 color={color}
               />

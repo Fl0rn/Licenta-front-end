@@ -1,0 +1,65 @@
+"filename", "language", "JSON with Comments", "JavaScript", "TypeScript JSX", "TypeScript", "XML", "JSON", "comment", "blank", "total"
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\App.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 0, 0, 5, 24
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\app.json", "JSON", 0, 0, 0, 0, 0, 38, 0, 2, 40
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\babel.config.js", "JavaScript", 0, 9, 0, 0, 0, 0, 0, 2, 11
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\AddCommentBtn.tsx", "TypeScript JSX", 0, 0, 43, 0, 0, 0, 0, 2, 45
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\AddCommentsModal.tsx", "TypeScript JSX", 0, 0, 82, 0, 0, 0, 0, 4, 86
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\BtnTapsIcon.tsx", "TypeScript JSX", 0, 0, 29, 0, 0, 0, 0, 0, 29
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\CustomOutlineBtn.tsx", "TypeScript JSX", 0, 0, 51, 0, 0, 0, 0, 6, 57
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\DateTimePicker.tsx", "TypeScript JSX", 0, 0, 53, 0, 0, 0, 0, 5, 58
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\DropdownComponent.tsx", "TypeScript JSX", 0, 0, 151, 0, 0, 0, 0, 11, 162
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\EventTypeBtn.tsx", "TypeScript JSX", 0, 0, 28, 0, 0, 0, 0, 1, 29
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\GooglePlacesInput.tsx", "TypeScript JSX", 0, 0, 60, 0, 0, 0, 0, 3, 63
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\IconBttn.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 2, 23
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\ImagePickerModal.tsx", "TypeScript JSX", 0, 0, 121, 0, 0, 0, 0, 2, 123
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\LogInBtn.tsx", "TypeScript JSX", 0, 0, 31, 0, 0, 0, 0, 2, 33
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\LogoutBtn.tsx", "TypeScript JSX", 0, 0, 7, 0, 0, 0, 0, 0, 7
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\UI\TextIconBtn.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 1, 31
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\adapter.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\authComponents\AuthForm.tsx", "TypeScript JSX", 0, 0, 114, 0, 0, 0, 0, 5, 119
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\authComponents\LoginForm.tsx", "TypeScript JSX", 0, 0, 93, 0, 0, 0, 0, 4, 97
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\AddEventForm.tsx", "TypeScript JSX", 0, 0, 271, 0, 0, 0, 0, 28, 299
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\CommentItem.tsx", "TypeScript JSX", 0, 0, 77, 0, 0, 0, 0, 3, 80
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\CommentsContainer.tsx", "TypeScript JSX", 0, 0, 62, 0, 0, 0, 0, 7, 69
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\EventItem.tsx", "TypeScript JSX", 0, 0, 81, 0, 0, 0, 0, 10, 91
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\eventComponents\InterestedPeopleComponent.tsx", "TypeScript JSX", 0, 0, 68, 0, 0, 0, 0, 1, 69
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\http.tsx", "TypeScript JSX", 0, 0, 22, 0, 0, 0, 0, 3, 25
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\ProfileHeader.tsx", "TypeScript JSX", 0, 0, 112, 0, 0, 0, 0, 7, 119
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\requestComponents\AplicaContCreatorBtn.tsx", "TypeScript JSX", 0, 0, 7, 0, 0, 0, 0, 2, 9
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\requestComponents\RequestBtn.tsx", "TypeScript JSX", 0, 0, 41, 0, 0, 0, 0, 2, 43
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\profileComponents\requestComponents\RequestItem.tsx", "TypeScript JSX", 0, 0, 108, 0, 0, 0, 0, 3, 111
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\AddReclamatieModal.tsx", "TypeScript JSX", 0, 0, 258, 0, 0, 0, 3, 11, 272
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\DetailPlangeriModal.tsx", "TypeScript JSX", 0, 0, 195, 0, 0, 0, 0, 6, 201
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\LegendaModal.tsx", "TypeScript JSX", 0, 0, 68, 0, 0, 0, 0, 6, 74
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\MarkerInfo.tsx", "TypeScript JSX", 0, 0, 71, 0, 0, 0, 0, 5, 76
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\ReclamatiiItem.tsx", "TypeScript JSX", 0, 0, 126, 0, 0, 0, 0, 4, 130
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\TownHallPage.tsx", "TypeScript JSX", 0, 0, 137, 0, 0, 0, 0, 15, 152
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\components\reclamatiiComponents\UserCreatorPage.tsx", "TypeScript JSX", 0, 0, 162, 0, 0, 0, 3, 11, 176
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\package-lock.json", "JSON", 0, 0, 0, 0, 0, 17247, 0, 1, 17248
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\package.json", "JSON", 0, 0, 0, 0, 0, 51, 0, 1, 52
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\AcceptRequsetScreen.tsx", "TypeScript JSX", 0, 0, 102, 0, 0, 0, 0, 4, 106
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\AddEventSreen.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 2, 7
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\AuthScreen.tsx", "TypeScript JSX", 0, 0, 230, 0, 0, 0, 0, 25, 255
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\DetailScreen.tsx", "TypeScript JSX", 0, 0, 370, 0, 0, 0, 1, 15, 386
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\EventScreen.tsx", "TypeScript JSX", 0, 0, 197, 0, 0, 0, 0, 8, 205
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\ProfileScreen.tsx", "TypeScript JSX", 0, 0, 152, 0, 0, 0, 0, 13, 165
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\ReclamatiiScreen.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 0, 2, 15
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\screens\UpcomingEvents.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 2, 7
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\AppContext.tsx", "TypeScript JSX", 0, 0, 64, 0, 0, 0, 0, 6, 70
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\Authenticated.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\BtnTapsNavigation.tsx", "TypeScript JSX", 0, 0, 111, 0, 0, 0, 0, 4, 115
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\stack\Non-authenticated.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 3, 24
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\store\auth-context.tsx", "TypeScript JSX", 0, 0, 43, 0, 0, 0, 0, 11, 54
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\store\redux\rerenderScreen.ts", "TypeScript", 0, 0, 0, 2, 0, 0, 0, 1, 3
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\store\redux\store.ts", "TypeScript", 0, 0, 0, 4, 0, 0, 0, 2, 6
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\tsconfig.json", "JSON with Comments", 6, 0, 0, 0, 0, 0, 0, 1, 7
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\Colors.ts", "TypeScript", 0, 0, 0, 12, 0, 0, 0, 2, 14
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\Line 3.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 1, 4
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\constants.tsx", "TypeScript JSX", 0, 0, 196, 0, 0, 0, 1, 6, 203
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\database.ts", "TypeScript", 0, 0, 0, 33, 0, 0, 0, 2, 35
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\http.ts", "TypeScript", 0, 0, 0, 5, 0, 0, 0, 0, 5
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\methods.ts", "TypeScript", 0, 0, 0, 93, 0, 0, 0, 11, 104
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\model\migrations.ts", "TypeScript", 0, 0, 0, 5, 0, 0, 1, 1, 7
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\model\schema.ts", "TypeScript", 0, 0, 0, 6, 0, 0, 1, 1, 8
+"d:\faculta\AN3Sem2\Licenta\proiectFinal\util\permissions.ts", "TypeScript", 0, 0, 0, 15, 0, 0, 0, 1, 16
+"Total", "-", 6, 9, 4308, 175, 3, 17336, 10, 309, 22156

@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import DateTimePicker, { Event as DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  Event as DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+import { Colors } from "../../util/Colors";
 
 type DateTimePickerComponentProps = {
-    mode: "date" | "time";
-    date: Date;
-    onChange: (event: any, selectedDate?: Date | undefined) => void;
-  };
+  mode: "date" | "time";
+  date: Date;
+  onChange: (event: any, selectedDate?: Date | undefined) => void;
+};
 
-function DateTimePickerComponent({mode,date,onChange}:DateTimePickerComponentProps) {
- 
-
-  
+function DateTimePickerComponent({
+  mode,
+  date,
+  onChange,
+}: DateTimePickerComponentProps) {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: Colors.primari300, borderRadius: 20 },
+      ]}
+    >
       <DateTimePicker
         value={date}
         mode={mode}
@@ -22,7 +31,7 @@ function DateTimePickerComponent({mode,date,onChange}:DateTimePickerComponentPro
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +43,9 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 18,
+  },
+  picker: {
+    color: "white",
   },
   errText: {
     color: "red",

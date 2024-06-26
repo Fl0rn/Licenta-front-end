@@ -9,6 +9,7 @@ type EventProps ={
     data:number,
     titlu:string,
     id:string
+   
     onPressToNavigate: (id:string) => void
 }
 export default function EventItem({image,data,titlu,onPressToNavigate,id}:EventProps) {

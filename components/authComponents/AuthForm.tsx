@@ -16,22 +16,39 @@ export default function AuthForm({
   onRegisterValuesHandler,
   validity,
 }: AuthFormProps) {
- 
   return (
     <View style={styles.container}>
-      <View style={[styles.inputContainer, validity.nume === null && styles.invalidField]}>
+      <View
+        style={[
+          styles.inputContainer,
+          validity.nume === null && styles.invalidField,
+        ]}
+      >
         <MaterialIcons
           name="account-box"
           size={24}
           color="black"
           style={styles.icon}
         />
-        <TextInput placeholder="Nume" onChangeText={(enteredValue)=>onRegisterValuesHandler(enteredValue,"nume")} />
+        <TextInput
+          placeholder="Nume"
+          onChangeText={(enteredValue) =>
+            onRegisterValuesHandler(enteredValue, "nume")
+          }
+        />
       </View>
       <View>
-        {validity.nume === null && <Text style={styles.invalidText}>Introduce-ti-va numele</Text>}
+        {validity.nume === null && (
+          <Text style={styles.invalidText}>Introduce-ti-va numele</Text>
+        )}
       </View>
-      <View style={[styles.inputContainer, (validity.email === null || validity.email === false) && styles.invalidField]}>
+      <View
+        style={[
+          styles.inputContainer,
+          (validity.email === null || validity.email === false) &&
+            styles.invalidField,
+        ]}
+      >
         <MaterialIcons
           name="email"
           size={24}
@@ -39,48 +56,96 @@ export default function AuthForm({
           style={styles.icon}
         />
 
-        <TextInput placeholder="Email" onChangeText={(enteredValue)=>onRegisterValuesHandler(enteredValue,"email")} />
+        <TextInput
+          placeholder="Email"
+          onChangeText={(enteredValue) =>
+            onRegisterValuesHandler(enteredValue, "email")
+          }
+        />
       </View>
       <View>
-        {validity.email === false && <Text style={styles.invalidText}>Emailul nu este valid</Text>}
-        {validity.email === null && <Text style={styles.invalidText}>Introduce-ti-va emailul</Text>}
+        {validity.email === false && (
+          <Text style={styles.invalidText}>Emailul nu este valid</Text>
+        )}
+        {validity.email === null && (
+          <Text style={styles.invalidText}>Introduce-ti-va emailul</Text>
+        )}
       </View>
-      <View style={[styles.inputContainer, (validity.cnp === null || validity.cnp === false) && styles.invalidField]}>
-  <MaterialIcons
-    name="email"
-    size={24}
-    color="black"
-    style={styles.icon}
-  />
-        <TextInput placeholder="CNP"  onChangeText={(enteredValue)=>onRegisterValuesHandler(enteredValue,"cnp")} />
+      <View
+        style={[
+          styles.inputContainer,
+          (validity.cnp === null || validity.cnp === false) &&
+            styles.invalidField,
+        ]}
+      >
+        <MaterialIcons
+          name="email"
+          size={24}
+          color="black"
+          style={styles.icon}
+        />
+        <TextInput
+          placeholder="CNP"
+          onChangeText={(enteredValue) =>
+            onRegisterValuesHandler(enteredValue, "cnp")
+          }
+        />
       </View>
       <View>
-        {validity.cnp === null && <Text style={styles.invalidText}>Introduce-ti-va CNP-ul</Text>}
-        {validity.cnp === false && <Text style={styles.invalidText}>Emailul nu este valid</Text>}
+        {validity.cnp === null && (
+          <Text style={styles.invalidText}>Introduce-ti-va CNP-ul</Text>
+        )}
+        {validity.cnp === false && (
+          <Text style={styles.invalidText}>Emailul nu este valid</Text>
+        )}
       </View>
-      <View style={[styles.inputContainer, validity.oras === null && styles.invalidField]}>
+      <View
+        style={[
+          styles.inputContainer,
+          validity.oras === null && styles.invalidField,
+        ]}
+      >
         <MaterialIcons
           name="place"
           size={24}
           color="black"
           style={styles.icon}
         />
-        <TextInput placeholder="Oras"  onChangeText={(enteredValue)=>onRegisterValuesHandler(enteredValue,"oras")} />
+        <TextInput
+          placeholder="Oras"
+          onChangeText={(enteredValue) =>
+            onRegisterValuesHandler(enteredValue, "oras")
+          }
+        />
       </View>
       <View>
-        {validity.oras === null && <Text style={styles.invalidText}>Introduce-ti-va orasul</Text>}
+        {validity.oras === null && (
+          <Text style={styles.invalidText}>Introduce-ti-va orasul</Text>
+        )}
       </View>
-      <View style={[styles.inputContainer, validity.parola === null && styles.invalidField]}>
+      <View
+        style={[
+          styles.inputContainer,
+          validity.parola === null && styles.invalidField,
+        ]}
+      >
         <MaterialIcons
           name="lock"
           size={24}
           color="black"
           style={styles.icon}
         />
-        <TextInput placeholder="Parola"  onChangeText={(enteredValue)=>onRegisterValuesHandler(enteredValue,"parola")} />
+        <TextInput
+          placeholder="Parola"
+          onChangeText={(enteredValue) =>
+            onRegisterValuesHandler(enteredValue, "parola")
+          }
+        />
       </View>
       <View>
-        {validity.parola === null && <Text style={styles.invalidText}>Introduce-ti-va parola</Text>}
+        {validity.parola === null && (
+          <Text style={styles.invalidText}>Introduce-ti-va parola</Text>
+        )}
       </View>
     </View>
   );
@@ -108,11 +173,11 @@ const styles = StyleSheet.create({
   icon: {
     paddingHorizontal: 10,
   },
-  invalidField:{
-    backgroundColor:"#F89A9A",
+  invalidField: {
+    backgroundColor: "#F89A9A",
   },
-  invalidText:{
-    color:'#FFFF',
-    fontWeight:'bold',
-  }
+  invalidText: {
+    color: "#FFFF",
+    fontWeight: "bold",
+  },
 });

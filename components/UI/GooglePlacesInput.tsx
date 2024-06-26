@@ -7,15 +7,15 @@ import { Colors } from "../../util/Colors";
 function GooglePlacesInput({
   onHandleInput,
 }: {
-  onHandleInput: (value: string | number | [number,number] , name: string) => void;
+  onHandleInput: (value: string | number | [number, number], name: string) => void;
 }) {
   return (
     <GooglePlacesAutocomplete
-    GooglePlacesDetailsQuery={{ fields: "geometry" }}
+      GooglePlacesDetailsQuery={{ fields: "geometry" }}
       placeholder="Adresa"
       onPress={(data, details = null) => {
         if (details) {
-          console.log(details)
+          console.log(details);
           onHandleInput(data.description, "adresa");
           const coords: [number, number] = [0, 0];
           coords[0] = details.geometry?.location.lat ?? 0;
@@ -34,17 +34,20 @@ function GooglePlacesInput({
         textInputContainer: styles.textInputContainer,
         textInput: styles.textInput,
       }}
+      textInputProps={{
+        placeholderTextColor: "white",
+      }}
       onFail={(error) => console.error(error)}
     />
   );
 }
 
 export default GooglePlacesInput;
+
 const styles = StyleSheet.create({
   placesAutocompleteContainer: {
     zIndex: 99,
     width: 100,
-
     flex: 0.5,
   },
   textInputContainer: {
@@ -52,9 +55,9 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 38,
-    color: "black",
+    color: "white",
     fontSize: 16,
-    backgroundColor: Colors.gray500,
+    backgroundColor: Colors.secondary500,
     width: 340,
   },
 });

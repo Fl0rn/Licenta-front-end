@@ -104,11 +104,14 @@ export function ProfileScreen(){
       <View style={styles.buttonsContainer}>
         <View style={styles.logout}>
           <CustomOutlineBtn
+          height={40}
+          width={200}
             color={Colors.primari300}
             title="Logout"
             onPress={() => {
               authCtx.logout();
             }}
+            disabled={false}
           />
         </View>
         <Button title="Cont Creator" color={Colors.primari300} onPress={()=>navigation.navigate("AcceptRequestScreen")}/>

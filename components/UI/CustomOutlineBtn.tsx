@@ -4,6 +4,9 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 type CustomBtnProps = {
   title: string;
   color: string;
+  height:number;
+  width:number;
+  disabled:boolean
   onPress: () => void;
 };
 
@@ -11,6 +14,9 @@ export default function CustomOutlineBtn({
   title,
   color,
   onPress,
+  height,
+  width,
+  disabled,
 }: CustomBtnProps) {
   const [pressed, setPressed] = useState(false);
 
@@ -19,6 +25,7 @@ export default function CustomOutlineBtn({
       onPress={onPress}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
+      disabled={disabled}
       style={({ pressed }) => [
         {
           backgroundColor: pressed ? "white" : color,
@@ -26,9 +33,9 @@ export default function CustomOutlineBtn({
           borderWidth: 2,
           alignSelf: "center",
           justifyContent: "center",
-          height: 40,
-          marginBottom: 15,
-          width: 200,
+          height: height,
+         
+          width: width,
           borderRadius: 7,
           margin: 6,
         },
@@ -44,7 +51,6 @@ export default function CustomOutlineBtn({
 const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
-
     textAlign: "center",
   },
 });

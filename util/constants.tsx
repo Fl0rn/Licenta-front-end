@@ -121,15 +121,18 @@ export function getStatusColor(status: string) {
 }
 
 export const ButtonTypes = [
-  "Upcoming",
+  "Recomandate",
+  "Urmatoare",
   "Divertisment",
-  "Culturale",
+  "Cultural",
   "Conferinte",
+  "StreetFood",
+  "Targuri",
 ];
 export const StatusButtons =[
   "In lucru",
-  "Neabordat",
-  "Terminat"
+  "Neabordata",
+  "Finalizat"
 ]
 export const API_KEY = "AIzaSyB7pHjqFGroA6xaKMHNdTdIGz14psqe-7o";
 export const BACKEND_LINK = "http://192.168.0.127:3000";

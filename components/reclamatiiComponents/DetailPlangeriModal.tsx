@@ -64,8 +64,8 @@ export default function DetailPlangeriModal({
             <View style={styles.textContainer}>
               <Text style={styles.title}>{plangere.title}</Text>
               <View style={styles.iconView}>
-                <Ionicons
-                  name="calendar"
+              <Ionicons
+                  name="location"
                   size={20}
                   color={Colors.primari300}
                   style={styles.icon}
@@ -73,8 +73,8 @@ export default function DetailPlangeriModal({
                 <Text style={styles.address}>{plangere.adress}</Text>
               </View>
               <View style={[styles.iconView, { alignItems: "center" }]}>
-                <Ionicons
-                  name="location"
+             <Ionicons
+                  name="calendar"
                   size={20}
                   color={Colors.primari300}
                   style={styles.icon}
@@ -103,6 +103,9 @@ export default function DetailPlangeriModal({
               color={Colors.primari300}
               title="Salveaza"
               onPress={handleSubmit}
+              height={37}
+              width={150}
+              disabled={false}
             />
             <Button
               title="Cancel"
@@ -126,9 +129,10 @@ const styles = StyleSheet.create({
 
   content: {
     width: "85%",
-    backgroundColor: "white",
+    backgroundColor: Colors.secondary300,
     padding: 20,
     borderRadius: 10,
+
   },
   header: {
     fontSize: 24,
@@ -156,10 +160,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
+    color:'white'
   },
   address: {
     fontSize: 16,
     marginBottom: 10,
+    color:Colors.gray700
   },
   iconView: {
     flexDirection: "row",
@@ -169,14 +175,14 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 14,
-    color: "gray",
+    color: Colors.gray700,
   },
   description: {
-    color: "black",
+    color: Colors.gray700,
     padding: 8,
   },
   descriptionView: {
-    backgroundColor: "white",
+    backgroundColor: Colors.secondary500,
     shadowColor: "#000",
     shadowOffset: { width: 3, height: 2 },
     shadowOpacity: 0.3,
@@ -186,6 +192,7 @@ const styles = StyleSheet.create({
   dropdownView: {
     alignItems: "center",
     margin: 10,
+    backgroundColor:Colors.secondary300
   },
   buttonContainer: {
     alignItems: "center",

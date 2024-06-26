@@ -19,7 +19,7 @@ export default function RequestBtn({ title, handleRequest }: RequestBtnProps) {
           { backgroundColor: title === "Accept" ? "green" : "red" },
         ]}
       >
-        <Text>{title}</Text>
+        <Text style={styles.text}>{title}</Text>
       </View>
     </Pressable>
   );
@@ -36,4 +36,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  text:{
+    color:'white'
+  }
 });

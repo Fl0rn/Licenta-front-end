@@ -13,7 +13,7 @@ type RequestModel = {
   city: string;
 };
 export default function AcceptRequestScreen() {
-  const [rerender,setRerender] = useState(0);
+  const [rerender, setRerender] = useState(0);
   const [requests, setRequests] = useState([
     {
       acountId: "",
@@ -61,16 +61,20 @@ export default function AcceptRequestScreen() {
     }
   }
 
-
   return (
-    <View>
+    <View style={styles.container}>
       <ProfileHeader showModlalHandler={() => {}} />
       <View style={styles.flatListView}>
-      {authCtx.userInfo?.acountType !==2 &&  <CustomOutlineBtn
-          color={Colors.primari300}
-          title="Aplica cont creator"
-          onPress={newRequestHandler}
-        />}
+        {authCtx.userInfo?.acountType !== 2 && (
+          <CustomOutlineBtn
+            color={Colors.primari300}
+            title={authCtx.userInfo?.acountType === 1? "Esti deja creator" :"Aplica cont creator"}
+            onPress={newRequestHandler}
+            height={40}
+            width={150}
+            disabled={authCtx.userInfo?.acountType === 1? true : false}
+          />
+        )}
         <FlatList
           data={requests}
           renderItem={({ item }) => (
@@ -83,14 +87,19 @@ export default function AcceptRequestScreen() {
               render={setRerender}
             />
           )}
-          keyExtractor={(item) => item.acountId} 
+          keyExtractor={(item) => item.acountId}
         />
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor:Colors.secondary300
+  },
   flatListView: {
     marginTop: 60,
+    height:300,
   },
 });

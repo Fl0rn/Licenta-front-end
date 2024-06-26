@@ -123,6 +123,7 @@ export default function AddEventForm() {
 
         <Button
           title="Adauga imagine"
+          color={Colors.primari300}
           onPress={() => setIsModalVisible(true)}
         />
         <ImagePickerModal
@@ -135,6 +136,7 @@ export default function AddEventForm() {
           <TextInput
             placeholder="Titlu"
             style={styles.input}
+            placeholderTextColor={Colors.primary500}
             onChangeText={(enteredText) => valuesHandler(enteredText, "titlu")}
           />
         </View>
@@ -197,6 +199,9 @@ export default function AddEventForm() {
             color={Colors.primari300}
             title="Adauga eveniment"
             onPress={handleSubmitForm}
+            height={40}
+            width={150}
+            disabled={false}
           />
           
           <Button title="Cancel" color={Colors.primari300} onPress={()=>navigation.navigate("BtnTaps")}  />
@@ -209,7 +214,7 @@ export default function AddEventForm() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.secondary300  ,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -235,12 +240,13 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: 10,
     alignSelf: "flex-start",
+    color:Colors.primari300
   },
   input: {
     width: "100%",
     paddingVertical: 16,
     paddingHorizontal: 12,
-    backgroundColor: Colors.gray700,
+    backgroundColor: Colors.secondary500,
     borderRadius: 10,
   },
   dateTimeContainer: {
@@ -255,12 +261,13 @@ const styles = StyleSheet.create({
   },
   dateTimeText: {
     marginBottom: 5,
+    color:Colors.primary500
   },
   description: {
     width: "100%",
     height: 120,
     padding: 12,
-    backgroundColor: Colors.gray700,
+    backgroundColor: Colors.secondary500,
     borderRadius: 10,
     textAlignVertical: "top",
   },

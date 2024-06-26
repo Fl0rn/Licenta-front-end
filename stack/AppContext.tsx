@@ -10,6 +10,7 @@ import AddEventScreen from "../screens/AddEventSreen";
 import DetailScreen from "../screens/DetailScreen";
 import AcceptRequestScreen from "../screens/AcceptRequsetScreen";
 import { AuthenticationStack } from "./Non-authenticated";
+import { UpcomingEvents } from "../screens/UpcomingEvents";
 const Stack = createStackNavigator<RootStackPrams>();
 
 export type RootStackPrams = {
@@ -21,6 +22,7 @@ export type RootStackPrams = {
   DetailPage:{
     id:string,
   };
+  UpcomingPage:undefined
   AcceptRequestScreen:undefined;
 };
 
@@ -59,6 +61,7 @@ export function AppContent() {
             <Stack.Screen name="AddEvent" component={AddEventScreen} />
             <Stack.Screen name="DetailPage" component={DetailScreen}/>
             <Stack.Screen name="AcceptRequestScreen" component={AcceptRequestScreen}/>
+            <Stack.Screen name="UpcomingPage" component={UpcomingEvents}/>
           </Stack.Navigator>
         </NavigationContainer>
       </>

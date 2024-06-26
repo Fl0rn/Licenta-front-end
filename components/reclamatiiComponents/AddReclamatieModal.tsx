@@ -118,19 +118,12 @@ export default function AddReclamatieModal({
         values.longitude = coordsFormPressingScreen.longitude 
       }
       
-
       const plangereToSend: ReclamatiiToSend = {
-        
         ...values,
-      
       accountId: authCtx.userInfo?.id!,
       accountName: authCtx.userInfo?.nume!,
       status: "in lucru",
     };
-    
-    //const result = insertPlangeri(plangereToSend);
-    //console.log("result Changes BREAAAAAAAAAAAAAAAAA",(await result).changes)
-   // console.log("result lastInsertRowId BREAAAAAAAAAAAAAAAAA",(await result).lastInsertRowId)
     try {
       const response = await axios.post(
         BACKEND_LINK + "/addNewPlangere",

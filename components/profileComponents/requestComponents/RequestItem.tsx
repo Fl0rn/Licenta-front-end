@@ -5,6 +5,7 @@ import timestampToDate from "../../../util/methods";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
+import { Colors } from "../../../util/Colors";
 type RequestItemProps = {
   name: string;
   id: string;
@@ -46,9 +47,11 @@ export default function RequestItem({
             style={styles.image}
           />
         </View>
-        <View>
-          <Text>{timestampToDate(date)}</Text>
-          <Text>{name}</Text>
+        <View style={styles.textContainer
+
+        }>
+          <Text style={[styles.text, {fontWeight:'500',fontSize:18}]}>{name}</Text>
+          <Text style={styles.text}>{timestampToDate(date)}</Text>
         </View>
       </View>
       {authCtx.userInfo?.acountType === 2 ? (
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 4,
     width: 320,
-    backgroundColor: "white",
+    backgroundColor:Colors.secondary500,
     height: 80,
     borderRadius: 10,
   },
@@ -88,6 +91,12 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: 50,
     width: 50,
+  },
+  textContainer:{
+    marginLeft:10
+  },
+  text:{
+    color:'white',
   },
   image: {
     height: "100%",

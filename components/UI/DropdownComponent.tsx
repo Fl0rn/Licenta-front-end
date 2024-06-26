@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from '../../util/Colors';
 
 const data = [
   { label: 'Divertisment', value: '1' },
@@ -49,7 +50,7 @@ const DropdownComponent = ({
   const renderLabel = () => {
     if (value || isFocus) {
       return (
-        <Text style={[styles.label, isFocus && { color: 'gray' }]}>
+        <Text style={[styles.label, { color: 'white', backgroundColor: Colors.secondary300 }]}>
           {label}
         </Text>
       );
@@ -83,7 +84,7 @@ const DropdownComponent = ({
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }, { width: width, height: height }]}
+        style={[styles.dropdown, { width: width, height: height }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -105,7 +106,7 @@ const DropdownComponent = ({
         renderLeftIcon={() => (
           <Ionicons
             style={styles.icon}
-            color={isFocus ? 'blue' : 'black'}
+            color="white"
             name={icon}
             size={20}
           />
@@ -119,12 +120,13 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.secondary300,
     padding: 10,
   },
   dropdown: {
-    borderColor: 'gray',
+    borderColor: Colors.primari300,
     borderWidth: 0.5,
+    padding: 10,
     borderRadius: 8,
     paddingHorizontal: 8,
   },
@@ -133,18 +135,20 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: Colors.secondary300,
     left: 22,
-    top: 8,
+    top: -10,
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
   },
   placeholderStyle: {
     fontSize: 16,
+    color: 'white',
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: 'white',
   },
   iconStyle: {
     width: 20,
@@ -153,5 +157,6 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+    color: 'white',
   },
 });
